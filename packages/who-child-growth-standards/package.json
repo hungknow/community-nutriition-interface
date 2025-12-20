@@ -1,0 +1,30 @@
+{
+  "name": "who-child-growth-standards",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "generate:component": "turbo gen react-component",
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "d3": "^7.9.0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/d3": "^7.4.3",
+    "@types/node": "^22.15.3",
+    "@vitest/ui": "^2.1.8",
+    "eslint": "^9.39.1",
+    "jsdom": "^25.0.1",
+    "playwright": "^1.49.1",
+    "typescript": "5.9.2",
+    "vitest": "^2.1.8"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
