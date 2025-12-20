@@ -1,5 +1,6 @@
 // Export all components
-export * from "./components/ui/button"
+export * from "./components/ui"
+
 
 // Export utilities
 export * from "./lib/utils"
