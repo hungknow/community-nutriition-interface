@@ -1,4 +1,4 @@
-import type { WeightForLength } from "./weight-for-length";
+import type { WeightForLength } from "./weight-for-length.types";
 
 /*
  * Reference: https://www.who.int/tools/child-growth-standards/standards/weight-for-length-height
