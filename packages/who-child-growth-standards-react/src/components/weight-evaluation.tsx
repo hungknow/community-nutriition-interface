@@ -13,7 +13,7 @@ export const WeightEvaluation = () => {
             birthdate: data.birthdate,
             gender: data.gender
         })
-    }, [])
+    }, [setWeightEvaluationRequest])
 
     return (
         <>
