@@ -26,8 +26,11 @@
     "typescript": "5.9.2"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "who-child-growth-standards": "workspace:*"
+    "react-hook-form": "^7.69.0",
+    "who-child-growth-standards": "workspace:*",
+    "zod": "^4.2.1"
   }
 }

@@ -1,5 +1,11 @@
-import {WeightLengthForm} from './weight-length-form';
+import {WeightLengthForm, type WeightLengthFormData} from './weight-length-form';
 
 export default {
-  default: <WeightLengthForm />,
+  default: (
+    <WeightLengthForm 
+      onSubmit={(data: WeightLengthFormData) => {
+        console.log('Form submitted with data:', data);
+      }}
+    />
+  ),
 };
