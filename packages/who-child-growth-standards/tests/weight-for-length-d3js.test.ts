@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { d3js_weight_for_length, calculateWeightFromLMS } from "../src/weight-for-length-d3js";
-import { WeightForLengthGirlBirthTo2Years } from "../src/weight-for-length-0-to-2-years";
+import { weightForLengthGirlBirthTo2Years } from "../src/weight-for-length-0-to-2-years";
 import { exportSvgToPng } from "./export-png";
 import * as fs from "fs";
 import * as path from "path";
@@ -27,7 +27,7 @@ describe("d3js_weight_for_length", () => {
 
   it("should create a chart with default options", () => {
     // Execute the function
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
     });
 
@@ -42,7 +42,7 @@ describe("d3js_weight_for_length", () => {
     const customWidth = 1000;
     const customHeight = 800;
 
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
       width: customWidth,
       height: customHeight,
@@ -55,7 +55,7 @@ describe("d3js_weight_for_length", () => {
   });
 
   it("should render all z-score curves", () => {
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
     });
 
@@ -72,7 +72,7 @@ describe("d3js_weight_for_length", () => {
   });
 
   it("should render axes", () => {
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
     });
 
@@ -89,7 +89,7 @@ describe("d3js_weight_for_length", () => {
   });
 
   it("should render axis labels", () => {
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
       xAxisLabel: "Length (cm)",
       yAxisLabel: "Weight (kg)",
@@ -115,7 +115,7 @@ describe("d3js_weight_for_length", () => {
     const title = "Weight-for-length";
     const subtitle = "Girls, Birth to 2 years";
 
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
       title,
       subtitle,
@@ -142,7 +142,7 @@ describe("d3js_weight_for_length", () => {
   });
 
   it("should render legend when enabled", () => {
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
       showLegend: true,
     });
@@ -155,7 +155,7 @@ describe("d3js_weight_for_length", () => {
   });
 
   it("should not render legend when disabled", () => {
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
       showLegend: false,
     });
@@ -168,7 +168,7 @@ describe("d3js_weight_for_length", () => {
   });
 
   it("should render grid lines when enabled", () => {
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
       showGrid: true,
     });
@@ -181,7 +181,7 @@ describe("d3js_weight_for_length", () => {
   });
 
   it("should not render grid lines when disabled", () => {
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
       showGrid: false,
     });
@@ -199,7 +199,7 @@ describe("d3js_weight_for_length", () => {
       sd1: "#00ff00", // Green for +1SD
     };
 
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
       colors: customColors,
     });
@@ -222,7 +222,7 @@ describe("d3js_weight_for_length", () => {
 
   it("should throw error for invalid container selector", () => {
     expect(() => {
-      d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+      d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
         container: "#non-existent-element",
       });
     }).toThrow('Container element "#non-existent-element" not found');
@@ -230,7 +230,7 @@ describe("d3js_weight_for_length", () => {
 
   it("should export chart to PNG", async () => {
     // Create chart
-    d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, {
+    d3js_weight_for_length(weightForLengthGirlBirthTo2Years, {
       container: container,
       title: "Weight-for-length",
       subtitle: "Girls, Birth to 2 years",
@@ -256,7 +256,7 @@ describe("d3js_weight_for_length", () => {
   it("should calculate weights using LMS method correctly", () => {
     // Test with first data point from the dataset
     // For length 45cm: l=-0.3833, m=2.4607, s=0.09029
-    const testData = WeightForLengthGirlBirthTo2Years[0];
+    const testData = weightForLengthGirlBirthTo2Years[0];
     const { l, m, s } = testData;
 
     // Test LMS calculation for median (z-score = 0)
@@ -340,7 +340,7 @@ describe("d3js_weight_for_length", () => {
       container.innerHTML = "";
 
       // Create chart
-      d3js_weight_for_length(WeightForLengthGirlBirthTo2Years, variation.options);
+      d3js_weight_for_length(weightForLengthGirlBirthTo2Years, variation.options);
 
       const svg = container.querySelector("svg");
       expect(svg).toBeTruthy();

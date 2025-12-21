@@ -2,7 +2,15 @@
   "name": "who-child-growth-standards",
   "version": "1.0.0",
   "description": "",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "scripts": {
+    "build": "tsup",
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit",
@@ -22,7 +30,8 @@
     "jsdom": "^25.0.1",
     "playwright": "^1.49.1",
     "typescript": "5.9.2",
-    "vitest": "^2.1.8"
+    "vitest": "^2.1.8",
+    "tsup": "^8.0.0"
   },
   "keywords": [],
   "author": "",

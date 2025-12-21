@@ -4,7 +4,7 @@ import type { WeightForLength } from "./weight-for-length";
  * Reference: https://www.who.int/tools/child-growth-standards/standards/weight-for-length-height
  */
 
-export const WeightForLengthGirlBirthTo2Years: WeightForLength[] = [
+export const weightForLengthGirlBirthTo2Years: WeightForLength[] = [
   { length: 45, l: -0.3833, m: 2.4607, s: 0.09029, sd3neg: 1.9, sd2neg: 2.1, sd1neg: 2.3, sd0: 2.5, sd1: 2.7, sd2: 3, sd3: 3.3 },
   { length: 45.5, l: -0.3833, m: 2.5457, s: 0.09033, sd3neg: 2, sd2neg: 2.1, sd1neg: 2.3, sd0: 2.5, sd1: 2.8, sd2: 3.1, sd3: 3.4 },
   { length: 46, l: -0.3833, m: 2.6306, s: 0.09037, sd3neg: 2, sd2neg: 2.2, sd1neg: 2.4, sd0: 2.6, sd1: 2.9, sd2: 3.2, sd3: 3.5 },
