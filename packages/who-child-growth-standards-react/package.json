@@ -21,11 +21,13 @@
     "eslint": "^9.39.1",
     "react-cosmos": "^7.1.0",
     "react-cosmos-dom": "^7.1.0",
+    "react-cosmos-plugin-vite": "^7.1.0",
     "tsup": "^8.0.0",
     "typescript": "5.9.2"
   },
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "who-child-growth-standards": "workspace:*"
   }
 }
