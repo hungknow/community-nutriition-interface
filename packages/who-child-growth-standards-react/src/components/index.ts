@@ -1,1 +1,1 @@
-export * from "./WeightLengthForm";
+export * from "./weight-length-form";

@@ -1,4 +1,3 @@
-import React from "react"
 import { FieldContent, FieldLabel, FieldSet, Input } from "@community-nutrition/ui"
 
 export const WeightLengthForm = () => {
