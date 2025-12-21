@@ -4,6 +4,7 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@community-nutrition/ui": ["../ui/src/index.ts"],
       "who-child-growth-standards/*": ["../who-child-growth-standards/src/*"]
     }

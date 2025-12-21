@@ -27,10 +27,14 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.562.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.69.0",
     "who-child-growth-standards": "workspace:*",
-    "zod": "^4.2.1"
+    "zod": "^4.2.1",
+    "@zedux/core": "2.0.0-rc.11",
+    "@zedux/react": "2.0.0-rc.11"
   }
 }
