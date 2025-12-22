@@ -48,7 +48,7 @@ export const weightForLengthD3jsChartOptionsAtom = atom('weight-for-length-d3js-
         width: 800,
         height: 600,
         title: "Weight-for-length",
-        subtitle: "Girls, Birth to 2 years",
+        subtitle: undefined,
         xAxisLabel: "Length (cm)",
         yAxisLabel: "Weight (kg)",
         margins: { top: 60, right: 80, bottom: 60, left: 80 },
