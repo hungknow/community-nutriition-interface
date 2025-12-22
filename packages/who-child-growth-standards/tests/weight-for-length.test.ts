@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { evaluateWeightForLength, WeightEvalulationStatus } from "../src/weight-for-length-maths";
+import { evaluateWeightForLength } from "../src/weight-for-length";
 import { weightForLengthGirlBirthTo2Years } from "../src/weight-for-length-0-to-2-years";
+import { WeightEvalulationStatus } from "../src/weight-for-length.types";
 
 describe("evaluateWeight", () => {
   describe("with exact length matches", () => {
@@ -236,5 +237,7 @@ describe("evaluateWeight", () => {
     });
   });
 });
+
+
 
 
