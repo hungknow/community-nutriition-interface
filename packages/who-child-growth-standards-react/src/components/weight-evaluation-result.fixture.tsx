@@ -9,7 +9,7 @@ const ecosystem = createEcosystem({
         const weightEvaluationRequestAtomNode = ecosystem.getNode(weightEvaluationRequestAtom, [])
         weightEvaluationRequestAtomNode.set({
             weight: 10,
-            length: 100,
+            length: 90,
             birthdate: new Date('2025-01-01'),
             gender: Gender.Female
         })

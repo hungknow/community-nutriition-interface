@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useMemo } from "react";
 import type { WeightForLength, WeightForLengthChartOptions } from "who-child-growth-standards";
-import { d3js_weight_for_length } from "who-child-growth-standards";
+import { d3js_weight_for_length, d3js_weight_length_point } from "who-child-growth-standards";
 
 /**
  * Props for the D3JsWeightForLength React component
@@ -12,7 +12,7 @@ import { d3js_weight_for_length } from "who-child-growth-standards";
 export interface D3JsWeightForLengthProps {
   /** Array of WeightForLength data points to render */
   data: WeightForLength[];
-  
+
   /** Width of the chart in pixels (default: 800) */
   width?: number;
   /** Height of the chart in pixels (default: 600) */
@@ -41,11 +41,15 @@ export interface D3JsWeightForLengthProps {
     sd2?: string;
     sd3?: string;
   };
-  
+
   /** Optional CSS class name for the container div */
   className?: string;
   /** Optional inline styles for the container div */
   style?: React.CSSProperties;
+  /** Current length measurement in cm (X-axis value) */
+  currentLength?: number;
+  /** Current weight measurement in kg (Y-axis value) */
+  currentWeight?: number;
 }
 
 /**
@@ -89,6 +93,8 @@ export const D3JsWeightForLength: React.FC<D3JsWeightForLengthProps> = ({
   colors,
   className,
   style,
+  currentLength,
+  currentWeight,
 }) => {
   // STEP 1: Create a ref to hold the container DOM element
   // This ref will point to the div that will contain our D3 visualization
@@ -100,7 +106,7 @@ export const D3JsWeightForLength: React.FC<D3JsWeightForLengthProps> = ({
   // This is important because React uses reference equality for object dependencies
   const chartOptions = useMemo<Omit<WeightForLengthChartOptions, "container">>(() => {
     const options: Omit<WeightForLengthChartOptions, "container"> = {};
-    
+
     // Only include properties that are actually provided (not undefined)
     // This allows the d3js_weight_for_length function to use its defaults
     if (width !== undefined) options.width = width;
@@ -113,7 +119,7 @@ export const D3JsWeightForLength: React.FC<D3JsWeightForLengthProps> = ({
     if (showGrid !== undefined) options.showGrid = showGrid;
     if (showLegend !== undefined) options.showLegend = showLegend;
     if (colors !== undefined) options.colors = colors;
-    
+
     return options;
   }, [width, height, title, subtitle, xAxisLabel, yAxisLabel, margins, showGrid, showLegend, colors]);
 
@@ -145,10 +151,17 @@ export const D3JsWeightForLength: React.FC<D3JsWeightForLengthProps> = ({
     // - Setting up scales, axes, and data visualization
     // - Adding labels, legends, and other chart elements
     try {
-      d3js_weight_for_length(data, {
+      const finalChartOptions = {
         ...chartOptions,
         container: containerElement, // Pass the actual DOM element, not a selector string
-      });
+      }
+      // Draw the chart
+      d3js_weight_for_length(data, finalChartOptions);
+
+      // Draw the point indicating the current weight and length (if provided)
+      if (currentLength !== undefined && currentWeight !== undefined) {
+        d3js_weight_length_point({ data, chartOptions: finalChartOptions, length: currentLength, weight: currentWeight });
+      }
     } catch (error) {
       // Handle any errors during rendering
       console.error("Error rendering D3 weight-for-length chart:", error);
@@ -157,13 +170,13 @@ export const D3JsWeightForLength: React.FC<D3JsWeightForLengthProps> = ({
     // STEP 3d: No cleanup needed
     // The d3js_weight_for_length function clears the container before rendering
     // So each render starts with a clean slate
-  }, [data, chartOptions]); // Dependencies: re-render when data or options change
+  }, [data, chartOptions, currentLength, currentWeight]); // Dependencies: re-render when data, options, or current measurements change
 
   // STEP 4: Render the container div
   // This div will be used as the container for the D3 visualization
   return (
-    <div 
-      ref={containerRef} 
+    <div
+      ref={containerRef}
       className={className}
       style={style}
     />
