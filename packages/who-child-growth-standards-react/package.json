@@ -9,32 +9,38 @@
     "build": "tsup",
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc --noEmit",
-    "cosmos": "cosmos --config cosmos/cosmos.config.json"
+    "cosmos": "cosmos --config cosmos/cosmos.config.json",
+    "test": "jest"
   },
   "devDependencies": {
     "@community-nutrition/eslint-config": "workspace:*",
     "@community-nutrition/typescript-config": "workspace:*",
     "@community-nutrition/ui": "workspace:*",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.1",
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.15.3",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "eslint": "^9.39.1",
+    "jest-environment-jsdom": "^30.0.0",
     "react-cosmos": "^7.1.0",
     "react-cosmos-dom": "^7.1.0",
     "react-cosmos-plugin-vite": "^7.1.0",
+    "ts-jest": "^29.4.6",
     "tsup": "^8.0.0",
     "typescript": "5.9.2"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@zedux/core": "2.0.0-rc.11",
+    "@zedux/react": "2.0.0-rc.11",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.562.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.69.0",
     "who-child-growth-standards": "workspace:*",
-    "zod": "^4.2.1",
-    "@zedux/core": "2.0.0-rc.11",
-    "@zedux/react": "2.0.0-rc.11"
+    "zod": "^4.2.1"
   }
 }

@@ -1,10 +1,12 @@
-import { weightEvaluationRequestAtom } from "@/atoms/weight-evaluation-atom"
-import { WeightLengthForm, WeightLengthFormData } from "./weight-length-form"
-import { useAtomState } from "@zedux/react"
 import { useCallback } from "react"
+import { weightEvaluationRequestAtom, weightStatusAtom } from "@/atoms/weight-evaluation-atom"
+import { WeightLengthForm, WeightLengthFormData } from "./weight-length-form"
+import { useAtomState, useAtomValue } from "@zedux/react"
+import { WeightEvaluationResult } from "./weight-evaluation-result"
 
 export const WeightEvaluation = () => {
     const [, setWeightEvaluationRequest] = useAtomState(weightEvaluationRequestAtom)
+    const weightStatus = useAtomValue(weightStatusAtom)
 
     const onSubmit = useCallback((data: WeightLengthFormData) => {
         setWeightEvaluationRequest({
@@ -18,7 +20,7 @@ export const WeightEvaluation = () => {
     return (
         <>
             <WeightLengthForm onSubmit={onSubmit} />
-
+            {weightStatus && <WeightEvaluationResult />}
         </>
     )
 }
