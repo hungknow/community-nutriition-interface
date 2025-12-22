@@ -1,4 +1,4 @@
-import { atom, useAtomValue } from "@zedux/react";
+import { atom, injectEcosystem } from "@zedux/react";
 import { evaluateWeightSinceBirth, Gender, getWeightForLengthByBirthDate } from "who-child-growth-standards";
 
 interface WeightEvaluationRequest {
@@ -9,8 +9,10 @@ interface WeightEvaluationRequest {
 }
 
 export const weightEvaluationRequestAtom = atom<WeightEvaluationRequest | null>('weight-evaluation', null)
+
 export const weightStatusAtom = atom('weight-status', () => {
-    const weightEvaluation = useAtomValue(weightEvaluationRequestAtom)
+    const { get } = injectEcosystem()
+    const weightEvaluation = get(weightEvaluationRequestAtom)
     if (!weightEvaluation) {
         return null
     }
@@ -18,12 +20,25 @@ export const weightStatusAtom = atom('weight-status', () => {
     return weightStatus
 })
 
-export const weightForLengthD3jsChartOptionsAtom = atom('weight-for-length-d3js-chart-options', () => {
-    const weightEvaluation = useAtomValue(weightEvaluationRequestAtom)
+export const weightForLengthDataAtom = atom('weight-for-length-data', () => {
+    const { get } = injectEcosystem()
+
+    const weightEvaluation = get(weightEvaluationRequestAtom)
     if (!weightEvaluation) {
         return null
     }
     const data = getWeightForLengthByBirthDate(weightEvaluation.birthdate, weightEvaluation.gender)
+    return data
+})
+
+export const weightForLengthD3jsChartOptionsAtom = atom('weight-for-length-d3js-chart-options', () => {
+    const { get } = injectEcosystem()
+
+    const weightEvaluation = get(weightEvaluationRequestAtom)
+    if (!weightEvaluation) {
+        return null
+    }
+    const data = get(weightForLengthDataAtom)
     if (!data) {
         return null
     }

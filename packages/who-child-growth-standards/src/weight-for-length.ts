@@ -5,7 +5,8 @@ import { WeightEvalulationStatus, WeightForLength } from "./weight-for-length.ty
 
 export function getWeightForLengthByBirthDate(birthDate: Date, gender: Gender): WeightForLength[] | undefined {
   const age = calculateMonthsSinceBirth(birthDate)
-  if (age < 2 && gender === Gender.Female) {
+  // 2 years in months
+  if (age < 24 && gender === Gender.Female) {
     return weightForLengthGirlBirthTo2Years
   }
   return undefined
