@@ -9,21 +9,28 @@ import { Gender } from "who-child-growth-standards"
 const weightLengthSchema = z.object({
   length: z
     .number()
-    .positive("Length must be positive")
-    .min(0.1, "Length must be at least 0.1 cm"),
+    .refine((val) => !isNaN(val) && isFinite(val), {
+      message: "Length is required",
+    })
+    .refine((val) => val > 0, {
+      message: "Length must be positive",
+    })
+    .refine((val) => val >= 0.1, {
+      message: "Length must be at least 0.1 cm",
+    }),
   weight: z
     .number()
-    .positive("Weight must be positive")
-    .min(0.01, "Weight must be at least 0.01 kg"),
+    .refine((val) => !isNaN(val) && isFinite(val), {
+      message: "Weight is required",
+    })
+    .refine((val) => val > 0, {
+      message: "Weight must be positive",
+    })
+    .refine((val) => val >= 0.01, {
+      message: "Weight must be at least 0.01 kg",
+    }),
   birthdate: z.date({
-    error: (issue) => {
-      if (issue.code === "invalid_type") {
-        return issue.input === undefined
-          ? "Birthdate is required"
-          : "Please select a valid date";
-      }
-      return "Invalid date";
-    },
+    message: "Birthdate is required",
   }),
   gender: z.enum(Gender),
 })
@@ -50,7 +57,7 @@ const LengthField = ({ register, error }: LengthFieldProps) => {
         aria-invalid={!!error}
         {...register("length", { valueAsNumber: true })}
       />
-      <FieldError errors={error ? [error] : undefined} />
+      {error && <FieldError>{error.message}</FieldError>}
     </Field>
   )
 }
@@ -71,7 +78,7 @@ const WeightField = ({ register, error }: WeightFieldProps) => {
         aria-invalid={!!error}
         {...register("weight", { valueAsNumber: true })}
       />
-      <FieldError errors={error ? [error] : undefined} />
+      {error && <FieldError>{error.message}</FieldError>}
     </Field>
   )
 }
@@ -118,7 +125,7 @@ const BirthdateField = ({ control, error }: BirthdateFieldProps) => {
           </Popover>
         )}
       />
-      <FieldError errors={error ? [error] : undefined} />
+      {error && <FieldError>{error.message}</FieldError>}
     </Field>
   )
 }
@@ -151,7 +158,7 @@ const GenderField = ({ control, error }: GenderFieldProps) => {
           </Select>
         )}
       />
-      <FieldError errors={error ? [error] : undefined} />
+      {error && <FieldError>{error.message}</FieldError>}
     </Field>
   )
 }
@@ -164,6 +171,7 @@ export const WeightLengthForm = ({ onSubmit }: WeightLengthFormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<WeightLengthFormData>({
     resolver: zodResolver(weightLengthSchema),
+    mode: "all"
   })
 
   return (

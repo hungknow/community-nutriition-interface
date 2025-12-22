@@ -2,7 +2,7 @@ import { calculateMonthsSinceBirth } from "./math"
 import { Gender } from "./types"
 import { weightForLengthGirlBirthTo2Years } from "./weight-for-length-0-to-2-years"
 import { weightForLengthGirl2To5Years } from "./weight-for-length-2-to-5-years"
-import { WeightEvalulationStatus, WeightForLength } from "./weight-for-length.types"
+import { WeightForLengthEvalulationStatus, WeightForLength } from "./weight-for-length.types"
 
 export function getWeightForLengthByBirthDate(birthDate: Date, gender: Gender): WeightForLength[] | undefined {
   const age = calculateMonthsSinceBirth(birthDate)
@@ -149,9 +149,9 @@ function findWeightForLengthEntry(
 * import { WeightForLengthGirlBirthTo2Years } from "./weight-for-length-0-to-2-years";
 * 
 * const status = evaluateWeight(3.5, 50, WeightForLengthGirlBirthTo2Years);
-* // Returns: WeightEvalulationStatus.BetweenSd0AndSd1 (or appropriate status)
+* // Returns: WeightForLengthEvalulationStatus.BetweenSd0AndSd1 (or appropriate status)
 */
-export function evaluateWeightForLength(weight: number, length: number, value: WeightForLength[]): WeightEvalulationStatus {
+export function evaluateWeightForLength(weight: number, length: number, value: WeightForLength[]): WeightForLengthEvalulationStatus {
   // Find the appropriate entry for the given length
   const entry = findWeightForLengthEntry(length, value);
   if (!entry) {
@@ -160,25 +160,25 @@ export function evaluateWeightForLength(weight: number, length: number, value: W
   // Compare weight with sdXX values to determine status
   // We compare directly with the weight values rather than z-score for accuracy
   if (weight < entry.sd3neg) {
-    return WeightEvalulationStatus.BelowSd3Neg;
+    return WeightForLengthEvalulationStatus.BelowSd3Neg;
   } else if (weight < entry.sd2neg) {
-    return WeightEvalulationStatus.BetweenSd3NegAndSd2Neg;
+    return WeightForLengthEvalulationStatus.BetweenSd3NegAndSd2Neg;
   } else if (weight < entry.sd1neg) {
-    return WeightEvalulationStatus.BetweenSd2NegAndSd1Neg;
+    return WeightForLengthEvalulationStatus.BetweenSd2NegAndSd1Neg;
   } else if (weight < entry.sd0) {
-    return WeightEvalulationStatus.BetweenSd1NegAndSd0;
+    return WeightForLengthEvalulationStatus.BetweenSd1NegAndSd0;
   } else if (weight < entry.sd1) {
-    return WeightEvalulationStatus.BetweenSd0AndSd1;
+    return WeightForLengthEvalulationStatus.BetweenSd0AndSd1;
   } else if (weight < entry.sd2) {
-    return WeightEvalulationStatus.BetweenSd1AndSd2;
+    return WeightForLengthEvalulationStatus.BetweenSd1AndSd2;
   } else if (weight < entry.sd3) {
-    return WeightEvalulationStatus.BetweenSd2AndSd3;
+    return WeightForLengthEvalulationStatus.BetweenSd2AndSd3;
   } else {
-    return WeightEvalulationStatus.AboveSd3;
+    return WeightForLengthEvalulationStatus.AboveSd3;
   }
 }
 
-export function evaluateWeightSinceBirth(weight: number, length: number, birthDate: Date, gender: Gender): WeightEvalulationStatus {
+export function evaluateWeightSinceBirth(weight: number, length: number, birthDate: Date, gender: Gender): WeightForLengthEvalulationStatus {
   const weightForLength = getWeightForLengthByBirthDate(birthDate, gender)
   if (!weightForLength) {
     throw new Error(`No data found for birth date ${birthDate} and gender ${gender}`)

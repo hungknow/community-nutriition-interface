@@ -12,7 +12,7 @@ export interface WeightForLength {
   sd3: number;
 }
 
-export enum WeightEvalulationStatus {
+export enum WeightForLengthEvalulationStatus {
   BelowSd3Neg = "below-sd3-neg",
   BetweenSd3NegAndSd2Neg = "between-sd3-neg-and-sd2-neg",
   BetweenSd2NegAndSd1Neg = "between-sd2-neg-and-sd1-neg",

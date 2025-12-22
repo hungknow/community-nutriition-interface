@@ -11,7 +11,7 @@ export const WeightEvaluationResult = () => {
     return (
         <div>
             <h1>Weight Evaluation Result</h1>
-            {/* Display the text according to WeightEvalulationStatus */}
+            {/* Display the text according to WeightForLengthEvalulationStatus */}
             {weightStatus && <WeightLengthStatus status={weightStatus} />}
 
             {/* Display d3js graph */}
