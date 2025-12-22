@@ -1,4 +1,4 @@
-import { AtomProvider, createEcosystem, EcosystemProvider } from "@zedux/react";
+import { createEcosystem, EcosystemProvider } from "@zedux/react";
 import { WeightEvaluationResult } from "./weight-evaluation-result";
 import { weightEvaluationRequestAtom } from "@/atoms/weight-evaluation-atom";
 import { Gender } from "who-child-growth-standards";

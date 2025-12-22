@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { WeightEvaluation } from './weight-evaluation'
 
 jest.mock('d3');

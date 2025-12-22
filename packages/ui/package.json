@@ -11,11 +11,10 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./styles": "./src/styles/globals.css"
+    "./styles": "./dist/styles/globals.css"
   },
   "files": [
-    "dist",
-    "src/styles"
+    "dist"
   ],
   "scripts": {
     "build": "tsup",
@@ -27,10 +26,13 @@
   "devDependencies": {
     "@community-nutrition/eslint-config": "workspace:*",
     "@community-nutrition/typescript-config": "workspace:*",
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^22.15.3",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "eslint": "^9.39.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
     "tsup": "^8.0.0",
     "typescript": "5.9.2"
   },
