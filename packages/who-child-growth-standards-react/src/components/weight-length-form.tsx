@@ -1,9 +1,7 @@
-import { Button, Calendar, Field, FieldError, FieldGroup, FieldLabel, Input, Popover, PopoverContent, PopoverTrigger, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@community-nutrition/ui"
+import { Button, Field, FieldError, FieldGroup, FieldLabel, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@community-nutrition/ui"
 import { useForm, Controller, UseFormRegister, Control, FieldErrors } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
 import { Gender } from "who-child-growth-standards"
 
 const weightLengthSchema = z.object({
@@ -88,42 +86,100 @@ interface BirthdateFieldProps {
   error?: FieldErrors<WeightLengthFormData>["birthdate"]
 }
 
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+] as const
+
+const getYears = () => {
+  const currentYear = new Date().getFullYear()
+  const years: number[] = []
+  for (let year = 2000; year <= currentYear; year++) {
+    years.push(year)
+  }
+  return years.reverse() // Most recent years first
+}
+
 const BirthdateField = ({ control, error }: BirthdateFieldProps) => {
+  const years = getYears()
+
   return (
     <Field data-invalid={!!error}>
       <FieldLabel htmlFor="birthdate">Birthdate</FieldLabel>
       <Controller
         name="birthdate"
         control={control}
-        render={({ field }) => (
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                id="birthdate"
-                type="button"
-                variant="outline"
-                data-empty={!field.value}
-                aria-invalid={!!error}
-                className="data-[empty=true]:text-muted-foreground w-[280px] justify-start text-left font-normal"
+        render={({ field }) => {
+          const currentMonth = field.value ? field.value.getMonth() : null
+          const currentYear = field.value ? field.value.getFullYear() : null
+
+          const handleMonthChange = (monthIndex: string) => {
+            const month = parseInt(monthIndex, 10)
+            const year = currentYear || new Date().getFullYear()
+            const newDate = new Date(year, month, 1)
+            field.onChange(newDate)
+          }
+
+          const handleYearChange = (yearStr: string) => {
+            const year = parseInt(yearStr, 10)
+            const month = currentMonth !== null ? currentMonth : 0
+            const newDate = new Date(year, month, 1)
+            field.onChange(newDate)
+          }
+
+          return (
+            <div className="flex gap-2">
+              <Select
+                value={currentMonth !== null ? currentMonth.toString() : ""}
+                onValueChange={handleMonthChange}
               >
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                {field.value ? (
-                  format(field.value, "PPP")
-                ) : (
-                  <span>Pick a date</span>
-                )}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
-              <Calendar
-                mode="single"
-                selected={field.value}
-                onSelect={field.onChange}
-                initialFocus
-              />
-            </PopoverContent>
-          </Popover>
-        )}
+                <SelectTrigger
+                  id="birthdate-month"
+                  aria-invalid={!!error}
+                  className="w-[140px]"
+                >
+                  <SelectValue placeholder="Month" />
+                </SelectTrigger>
+                <SelectContent>
+                  {MONTHS.map((month, index) => (
+                    <SelectItem key={month} value={index.toString()}>
+                      {month}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select
+                value={currentYear !== null ? currentYear.toString() : ""}
+                onValueChange={handleYearChange}
+              >
+                <SelectTrigger
+                  id="birthdate-year"
+                  aria-invalid={!!error}
+                  className="w-[100px]"
+                >
+                  <SelectValue placeholder="Year" />
+                </SelectTrigger>
+                <SelectContent>
+                  {years.map((year) => (
+                    <SelectItem key={year} value={year.toString()}>
+                      {year}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )
+        }}
       />
       {error && <FieldError>{error.message}</FieldError>}
     </Field>
@@ -171,7 +227,10 @@ export const WeightLengthForm = ({ onSubmit }: WeightLengthFormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<WeightLengthFormData>({
     resolver: zodResolver(weightLengthSchema),
-    mode: "all"
+    mode: "all",
+    defaultValues: {
+      gender: Gender.Male,
+    },
   })
 
   return (
