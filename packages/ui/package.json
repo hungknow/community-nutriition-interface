@@ -4,7 +4,9 @@
   "private": true,
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/styles/globals.css"
+  ],
   "typesVersions": {
     "*": {
       "*": ["./dist/index.d.mts"]

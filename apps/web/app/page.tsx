@@ -1,6 +1,6 @@
 import { NutritionForm } from "./nutrition-form";
 import styles from "./page.module.css";
-import "@community-nutrition/ui/dist/styles/globals.css"
+import "@community-nutrition/ui/styles"
 
 export default function Home() {
   return (
