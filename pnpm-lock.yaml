@@ -193,6 +193,9 @@ importers:
       '@types/react-dom':
         specifier: 19.2.2
         version: 19.2.2(@types/react@19.2.2)
+      esbuild-fix-imports-plugin:
+        specifier: ^1.0.23
+        version: 1.0.23
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
@@ -2883,6 +2886,9 @@ packages:
   es6-promisify@7.0.0:
     resolution: {integrity: sha512-ginqzK3J90Rd4/Yz7qRrqUeIpe3TwSXTPPZtPne7tGBPeAaQiU8qt4fpKApnxHcq1AwtUdHVg5P77x/yrggG8Q==}
     engines: {node: '>=6'}
+
+  esbuild-fix-imports-plugin@1.0.23:
+    resolution: {integrity: sha512-zDn2Mq3OnW9qNm9FrHDeE0FePgIRIaH9EWpHOGsJZFPfyPSNqzvCK/x9EZJ5eHEEyXe8ZGdb5CjDpzqkyAqcCg==}
 
   esbuild@0.21.5:
     resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
@@ -7619,6 +7625,8 @@ snapshots:
       is-symbol: 1.1.1
 
   es6-promisify@7.0.0: {}
+
+  esbuild-fix-imports-plugin@1.0.23: {}
 
   esbuild@0.21.5:
     optionalDependencies:
