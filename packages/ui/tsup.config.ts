@@ -8,7 +8,7 @@ export default defineConfig({
     "src/components/ui/**/*.tsx",
     "src/lib/**/*.ts",
   ],
-  format: ["cjs", "esm"],
+  format: ["esm"],
   dts: true,
   bundle: false,
   splitting: false,

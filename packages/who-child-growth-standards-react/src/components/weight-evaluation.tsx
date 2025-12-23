@@ -1,5 +1,5 @@
 import { useCallback } from "react"
-import { weightEvaluationRequestAtom, weightStatusAtom } from "@/atoms/weight-evaluation-atom"
+import { weightEvaluationRequestAtom, weightStatusAtom } from "../atoms/weight-evaluation-atom" //"@/atoms/weight-evaluation-atom"
 import { WeightLengthForm, WeightLengthFormData } from "./weight-length-form"
 import { useAtomState, useAtomValue } from "@zedux/react"
 import { WeightEvaluationResult } from "./weight-evaluation-result"

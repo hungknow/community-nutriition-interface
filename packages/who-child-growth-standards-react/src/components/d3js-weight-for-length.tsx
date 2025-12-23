@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useRef, useMemo } from "react";
 import type { WeightForLength, WeightForLengthChartOptions } from "who-child-growth-standards";
 import { d3js_weight_for_length, d3js_weight_length_point } from "who-child-growth-standards";

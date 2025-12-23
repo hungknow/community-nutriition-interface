@@ -227,7 +227,7 @@ export const WeightLengthForm = ({ onSubmit }: WeightLengthFormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<WeightLengthFormData>({
     resolver: zodResolver(weightLengthSchema),
-    mode: "all",
+    mode: "onSubmit",
     defaultValues: {
       gender: Gender.Male,
     },

@@ -2,11 +2,28 @@
   "name": "@community-nutrition/who-child-growth-standards-react",
   "version": "0.0.0",
   "private": true,
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "typesVersions": {
+    "*": {
+      "*": ["./dist/index.d.ts"]
+    }
+  },
   "exports": {
-    "./*": "./src/*.tsx"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
   },
   "scripts": {
     "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "check-types": "tsc --noEmit",
@@ -33,7 +50,8 @@
     "tsup": "^8.0.0",
     "typescript": "5.9.2",
     "vite": "^7.3.0",
-    "vite-tsconfig-paths": "^6.0.3"
+    "vite-tsconfig-paths": "^6.0.3",
+    "esbuild-fix-imports-plugin": "^1.0.23"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
