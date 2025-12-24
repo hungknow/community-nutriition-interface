@@ -12,7 +12,7 @@ export const WeightEvaluationResult = () => {
         <div>
             <h1>Weight Evaluation Result</h1>
             {/* Display the text according to WeightForLengthEvalulationStatus */}
-            {weightStatus && <WeightLengthStatus status={weightStatus} />}
+            {weightStatus?.isOk && <WeightLengthStatus status={weightStatus.value} />}
 
             {/* Display d3js graph */}
             {weightForLengthD3jsChartOptions && <D3JsWeightForLength

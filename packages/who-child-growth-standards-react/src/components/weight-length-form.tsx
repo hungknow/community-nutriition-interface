@@ -1,4 +1,4 @@
-import { Button, Field, FieldError, FieldGroup, FieldLabel, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@community-nutrition/ui"
+import { Button, Field, FieldDescription, FieldError, FieldGroup, FieldLabel, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@community-nutrition/ui"
 import { useForm, Controller, UseFormRegister, Control, FieldErrors } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -57,6 +57,9 @@ const LengthField = ({ register, error }: LengthFieldProps) => {
         aria-invalid={!!error}
         {...register("length", { valueAsNumber: true })}
       />
+      <FieldDescription>
+        {t("The recommended length for a child is between 65 cm and 120 cm.")}
+      </FieldDescription>
       {error && <FieldError>{error.message}</FieldError>}
     </Field>
   )
@@ -78,6 +81,9 @@ const WeightField = ({ register, error }: WeightFieldProps) => {
         aria-invalid={!!error}
         {...register("weight", { valueAsNumber: true })}
       />
+      <FieldDescription>
+        {t("The recommended weight for a child is between 1 kg and 26 kg.")}
+      </FieldDescription>
       {error && <FieldError>{error.message}</FieldError>}
     </Field>
   )

@@ -185,7 +185,7 @@ export function evaluateWeightForLength(weight: number, length: number, value: W
 export function evaluateWeightSinceBirth(weight: number, length: number, birthDate: Date, gender: Gender): WeightForLengthEvalulationStatus {
   const weightForLength = getWeightForLengthByBirthDate(birthDate, gender)
   if (!weightForLength) {
-    throw new Error(`No data found for birth date ${birthDate} and gender ${gender}`)
+    throw new Error(`No data found for the birth date ${birthDate} and the gender ${gender}`);
   }
   return evaluateWeightForLength(weight, length, weightForLength)
 }

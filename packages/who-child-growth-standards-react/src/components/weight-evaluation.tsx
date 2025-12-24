@@ -6,7 +6,7 @@ import { WeightEvaluationResult } from "./weight-evaluation-result"
 
 export const WeightEvaluation = () => {
     const [, setWeightEvaluationRequest] = useAtomState(weightEvaluationRequestAtom)
-    const weightStatus = useAtomValue(weightStatusAtom)
+    const weightStatusResult = useAtomValue(weightStatusAtom)
 
     const onSubmit = useCallback((data: WeightLengthFormData) => {
         setWeightEvaluationRequest({
@@ -20,7 +20,8 @@ export const WeightEvaluation = () => {
     return (
         <>
             <WeightLengthForm onSubmit={onSubmit} />
-            {weightStatus && <WeightEvaluationResult />}
+            {weightStatusResult?.isOk && <WeightEvaluationResult />}
+            {weightStatusResult?.isErr && <div>Error: {weightStatusResult.error.message}</div>}
         </>
     )
 }

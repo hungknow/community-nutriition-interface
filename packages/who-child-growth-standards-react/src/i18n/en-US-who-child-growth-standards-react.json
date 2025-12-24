@@ -24,5 +24,7 @@
     "year": "Year",
     "weight(kg)": "Weight (kg)",
     "length(cm)": "Length (cm)",
-    "gender": "Gender"
+    "gender": "Gender",
+    "The recommended length for a child is between 65 cm and 120 cm.": "The recommended length for a child is between 65 cm and 120 cm.",
+    "The recommended weight for a child is between 1 kg and 26 kg.": "The recommended weight for a child is between 1 kg and 26 kg."
 }

@@ -1,5 +1,7 @@
 import { atom, injectEcosystem } from "@zedux/react";
-import { evaluateWeightSinceBirth, Gender, getWeightForLengthByBirthDate } from "who-child-growth-standards";
+import { evaluateWeightSinceBirth, Gender, getWeightForLengthByBirthDate, WeightForLengthEvalulationStatus } from "who-child-growth-standards";
+import { Result } from "@badrap/result";
+import { errorToResult } from "@/utils/badrap-result";
 
 interface WeightEvaluationRequest {
     length: number
@@ -14,10 +16,14 @@ export const weightStatusAtom = atom('weight-status', () => {
     const { get } = injectEcosystem()
     const weightEvaluation = get(weightEvaluationRequestAtom)
     if (!weightEvaluation) {
-        return null
+        return undefined
     }
-    const weightStatus = evaluateWeightSinceBirth(weightEvaluation.weight, weightEvaluation.length, weightEvaluation.birthdate, weightEvaluation.gender)
-    return weightStatus
+    try {
+        const weightStatus = evaluateWeightSinceBirth(weightEvaluation.weight, weightEvaluation.length, weightEvaluation.birthdate, weightEvaluation.gender)
+        return Result.ok(weightStatus)
+    } catch (error) {
+        return errorToResult<WeightForLengthEvalulationStatus, unknown>(error)
+    }
 })
 
 export const weightForLengthDataAtom = atom('weight-for-length-data', () => {
@@ -25,7 +31,7 @@ export const weightForLengthDataAtom = atom('weight-for-length-data', () => {
 
     const weightEvaluation = get(weightEvaluationRequestAtom)
     if (!weightEvaluation) {
-        return null
+        return undefined
     }
     const data = getWeightForLengthByBirthDate(weightEvaluation.birthdate, weightEvaluation.gender)
     return data

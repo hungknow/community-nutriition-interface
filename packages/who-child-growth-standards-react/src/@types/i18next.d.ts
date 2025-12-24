@@ -2,6 +2,7 @@
 import 'i18next'
 
 import { i18nResources } from '../i18n/i18n-resources';
+import { I18N_NAMESPACE_WHO_CHILD_GROWTH_STANDARDS_REACT } from '../i18n/constants';
 
 declare module 'i18next' {
   // Extend CustomTypeOptions
@@ -12,3 +13,6 @@ declare module 'i18next' {
     // returnNull: false;
   }
 }
+
+// Export type for translation keys in the namespace
+export type TranslationKey = keyof typeof i18nResources["en"][typeof I18N_NAMESPACE_WHO_CHILD_GROWTH_STANDARDS_REACT];

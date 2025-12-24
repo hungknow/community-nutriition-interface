@@ -8,6 +8,7 @@ export default defineConfig({
     "src/components/!(*.fixture|*.test).{ts,tsx}",
     "src/atoms/!(*.fixture|*.test).{ts,tsx}",
     "src/i18n/!(*.fixture|*.test).{ts,tsx}",
+    "src/utils/!(*.fixture|*.test).{ts,tsx}",
   ],
   format: ["esm"],
   dts: true,
