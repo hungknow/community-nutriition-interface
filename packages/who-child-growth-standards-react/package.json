@@ -11,7 +11,9 @@
   ],
   "typesVersions": {
     "*": {
-      "*": ["./dist/index.d.ts"]
+      "*": [
+        "./dist/index.d.ts"
+      ]
     }
   },
   "exports": {
@@ -41,6 +43,7 @@
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "@vitejs/plugin-react": "^5.1.2",
+    "esbuild-fix-imports-plugin": "^1.0.23",
     "eslint": "^9.39.1",
     "jest-environment-jsdom": "^30.0.0",
     "react-cosmos": "^7.1.0",
@@ -50,18 +53,19 @@
     "tsup": "^8.0.0",
     "typescript": "5.9.2",
     "vite": "^7.3.0",
-    "vite-tsconfig-paths": "^6.0.3",
-    "esbuild-fix-imports-plugin": "^1.0.23"
+    "vite-tsconfig-paths": "^6.0.3"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@zedux/core": "2.0.0-rc.11",
     "@zedux/react": "2.0.0-rc.11",
     "date-fns": "^4.1.0",
+    "i18next": "^25.7.3",
     "lucide-react": "^0.562.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.69.0",
+    "react-i18next": "^16.5.0",
     "who-child-growth-standards": "workspace:*",
     "zod": "^4.2.1"
   }

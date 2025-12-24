@@ -3,18 +3,20 @@ import { useForm, Controller, UseFormRegister, Control, FieldErrors } from "reac
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Gender } from "who-child-growth-standards"
+import { t } from "i18next"
+import { useTranslation } from "react-i18next"
 
 const weightLengthSchema = z.object({
   length: z
     .number()
     .refine((val) => !isNaN(val) && isFinite(val), {
-      message: "Length is required",
+      message: t("lengthIsRequired"),
     })
     .refine((val) => val > 0, {
-      message: "Length must be positive",
+      message: t("lengthMustBePositive"),
     })
     .refine((val) => val >= 0.1, {
-      message: "Length must be at least 0.1 cm",
+      message: t("lengthMustBeAtleast0.1cm")
     }),
   weight: z
     .number()
@@ -47,7 +49,7 @@ interface LengthFieldProps {
 const LengthField = ({ register, error }: LengthFieldProps) => {
   return (
     <Field data-invalid={!!error}>
-      <FieldLabel htmlFor="length">Length (cm)</FieldLabel>
+      <FieldLabel htmlFor="length">{t("length(cm)")}</FieldLabel>
       <Input
         id="length"
         type="number"
@@ -68,7 +70,7 @@ interface WeightFieldProps {
 const WeightField = ({ register, error }: WeightFieldProps) => {
   return (
     <Field data-invalid={!!error}>
-      <FieldLabel htmlFor="weight">Weight (kg)</FieldLabel>
+      <FieldLabel htmlFor="weight">{t("weight(kg)")}</FieldLabel>
       <Input
         id="weight"
         type="number"
@@ -87,18 +89,18 @@ interface BirthdateFieldProps {
 }
 
 const MONTHS = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  t("january"),
+  t("february"),
+  t("march"),
+  t("april"),
+  t("may"),
+  t("june"),
+  t("july"),
+  t("august"),
+  t("september"),
+  t("october"),
+  t("november"),
+  t("december"),
 ] as const
 
 const getYears = () => {
@@ -115,7 +117,7 @@ const BirthdateField = ({ control, error }: BirthdateFieldProps) => {
 
   return (
     <Field data-invalid={!!error}>
-      <FieldLabel htmlFor="birthdate">Birthdate</FieldLabel>
+      <FieldLabel htmlFor="birthdate">{t("birthdate")}</FieldLabel>
       <Controller
         name="birthdate"
         control={control}
@@ -146,9 +148,9 @@ const BirthdateField = ({ control, error }: BirthdateFieldProps) => {
                 <SelectTrigger
                   id="birthdate-month"
                   aria-invalid={!!error}
-                  className="w-[140px]"
+                  className="flex-1"
                 >
-                  <SelectValue placeholder="Month" />
+                  <SelectValue placeholder={t("month")} />
                 </SelectTrigger>
                 <SelectContent>
                   {MONTHS.map((month, index) => (
@@ -165,9 +167,9 @@ const BirthdateField = ({ control, error }: BirthdateFieldProps) => {
                 <SelectTrigger
                   id="birthdate-year"
                   aria-invalid={!!error}
-                  className="w-[100px]"
+                  className="flex-1"
                 >
-                  <SelectValue placeholder="Year" />
+                  <SelectValue placeholder={t("year")} />
                 </SelectTrigger>
                 <SelectContent>
                   {years.map((year) => (
@@ -194,7 +196,7 @@ interface GenderFieldProps {
 const GenderField = ({ control, error }: GenderFieldProps) => {
   return (
     <Field data-invalid={!!error}>
-      <FieldLabel htmlFor="gender">Gender</FieldLabel>
+      <FieldLabel htmlFor="gender">{t("gender")}</FieldLabel>
       <Controller
         name="gender"
         control={control}
@@ -205,11 +207,11 @@ const GenderField = ({ control, error }: GenderFieldProps) => {
             onValueChange={field.onChange}
           >
             <SelectTrigger id="gender" aria-invalid={!!error}>
-              <SelectValue placeholder="Select a gender" />
+              <SelectValue placeholder={t("selectAGender")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={Gender.Male}>Male</SelectItem>
-              <SelectItem value={Gender.Female}>Female</SelectItem>
+              <SelectItem value={Gender.Male}>{t("male")}</SelectItem>
+              <SelectItem value={Gender.Female}>{t("female")}</SelectItem>
             </SelectContent>
           </Select>
         )}
@@ -220,6 +222,8 @@ const GenderField = ({ control, error }: GenderFieldProps) => {
 }
 
 export const WeightLengthForm = ({ onSubmit }: WeightLengthFormProps) => {
+  const { t } = useTranslation()
+
   const {
     register,
     handleSubmit,
@@ -244,7 +248,7 @@ export const WeightLengthForm = ({ onSubmit }: WeightLengthFormProps) => {
 
         <Field orientation="horizontal">
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Submit"}
+            {isSubmitting ? t("submitting") : t("submit")}
           </Button>
         </Field>
       </FieldGroup>
