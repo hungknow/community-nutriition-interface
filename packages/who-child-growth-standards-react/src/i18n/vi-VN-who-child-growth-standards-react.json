@@ -26,5 +26,12 @@
     "length(cm)": "Chiều dài (cm)",
     "gender": "Giới tính",
     "The recommended length for a child is between 65 cm and 120 cm.": "Chiều dài khuyến nghị cho trẻ em nằm trong khoảng 65 cm đến 120 cm.",
-    "The recommended weight for a child is between 1 kg and 26 kg.": "Cân nặng khuyến nghị cho trẻ em nằm trong khoảng 1 kg đến 26 kg."
+    "The recommended weight for a child is between 1 kg and 26 kg.": "Cân nặng khuyến nghị cho trẻ em nằm trong khoảng 1 kg đến 26 kg.",
+    "Birthdate is required": "Ngày sinh là bắt buộc",
+    "Length is required": "Chiều dài là bắt buộc",
+    "Weight is required": "Cân nặng là bắt buộc",
+    "Length must be at least 30 cm": "Chiều dài phải ít nhất 30 cm",
+    "Length must be at most 120 cm": "Chiều dài tối đa 120 cm",
+    "Weight must be at least 1 kg": "Cân nặng phải ít nhất 1 kg",
+    "Weight must be at most 26 kg": "Cân nặng tối đa 26 kg"
 }

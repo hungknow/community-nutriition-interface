@@ -69,6 +69,6 @@
     "react-hook-form": "^7.69.0",
     "react-i18next": "^16.5.0",
     "who-child-growth-standards": "workspace:*",
-    "zod": "^4.2.1"
+    "zod": "^3.25.0"
   }
 }

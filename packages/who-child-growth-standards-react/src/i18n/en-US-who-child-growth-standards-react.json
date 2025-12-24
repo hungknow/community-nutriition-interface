@@ -26,5 +26,12 @@
     "length(cm)": "Length (cm)",
     "gender": "Gender",
     "The recommended length for a child is between 65 cm and 120 cm.": "The recommended length for a child is between 65 cm and 120 cm.",
-    "The recommended weight for a child is between 1 kg and 26 kg.": "The recommended weight for a child is between 1 kg and 26 kg."
+    "The recommended weight for a child is between 1 kg and 26 kg.": "The recommended weight for a child is between 1 kg and 26 kg.",
+    "Birthdate is required": "Birthdate is required",
+    "Length is required": "Length is required",
+    "Weight is required": "Weight is required",
+    "Length must be at least 30 cm": "Length must be at least 30 cm",
+    "Length must be at most 120 cm": "Length must be at most 120 cm",
+    "Weight must be at least 1 kg": "Weight must be at least 1 kg",
+    "Weight must be at most 26 kg": "Weight must be at most 26 kg"
 }
