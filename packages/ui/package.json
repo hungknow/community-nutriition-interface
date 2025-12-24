@@ -5,11 +5,13 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "sideEffects": [
-    "./dist/styles/globals.css"
+    "**/*.css"
   ],
   "typesVersions": {
     "*": {
-      "*": ["./dist/index.d.mts"]
+      "*": [
+        "./dist/index.d.mts"
+      ]
     }
   },
   "exports": {

@@ -5,7 +5,7 @@ export default defineConfig({
   entry: [
     "src/index.ts",
     "src/styles/globals.css",
-    "src/components/ui/**/*.tsx",
+    "src/components/ui/**/*.{ts,tsx}",
     "src/lib/**/*.ts",
   ],
   format: ["esm"],
