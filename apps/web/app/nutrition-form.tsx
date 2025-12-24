@@ -4,7 +4,7 @@ import { WeightEvaluation } from "@community-nutrition/who-child-growth-standard
 
 export const NutritionForm = () => {
     return (
-        <div>
+        <div style={{ width: '500px' }}>
             <WeightEvaluation />
         </div>
     )

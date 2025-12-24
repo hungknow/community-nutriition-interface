@@ -3,8 +3,8 @@ import { useForm, Controller, UseFormRegister, Control, FieldErrors } from "reac
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Gender } from "who-child-growth-standards"
-import { t } from "i18next"
 import { useTranslation } from "react-i18next"
+import { t } from "@/i18n/i18n-functions"
 
 const weightLengthSchema = z.object({
   length: z

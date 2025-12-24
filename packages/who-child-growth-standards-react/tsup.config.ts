@@ -6,6 +6,7 @@ export default defineConfig({
     "src/index.ts",
     "src/components/!(*.fixture|*.test).tsx",
     "src/atoms/!(*.fixture|*.test).ts",
+    "src/i18n/!(*.fixture|*.test).ts",
   ],
   format: ["esm"],
   dts: true,

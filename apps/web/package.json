@@ -13,9 +13,11 @@
   "dependencies": {
     "@community-nutrition/ui": "workspace:*",
     "@community-nutrition/who-child-growth-standards-react": "workspace:*",
+    "i18next": "^25.7.3",
     "next": "16.0.10",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-i18next": "^16.5.0"
   },
   "devDependencies": {
     "@community-nutrition/eslint-config": "workspace:*",

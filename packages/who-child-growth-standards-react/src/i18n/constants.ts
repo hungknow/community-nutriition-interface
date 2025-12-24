@@ -1,0 +1,1 @@
+export const I18N_NAMESPACE_WHO_CHILD_GROWTH_STANDARDS_REACT = "who-child-growth-standards-react" as const;
