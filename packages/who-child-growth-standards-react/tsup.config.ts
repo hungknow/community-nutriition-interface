@@ -9,6 +9,7 @@ export default defineConfig({
     "src/atoms/!(*.fixture|*.test).{ts,tsx}",
     "src/i18n/!(*.fixture|*.test).{ts,tsx}",
     "src/utils/!(*.fixture|*.test).{ts,tsx}",
+    "src/hooks/!(*.fixture|*.test).{ts,tsx}",
   ],
   format: ["esm"],
   dts: true,

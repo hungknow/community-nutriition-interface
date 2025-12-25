@@ -51,8 +51,6 @@ export const weightForLengthD3jsChartOptionsAtom = atom('weight-for-length-d3js-
 
     return {
         data: data,
-        width: 800,
-        height: 600,
         title: "Weight-for-length",
         subtitle: undefined,
         xAxisLabel: "Length (cm)",

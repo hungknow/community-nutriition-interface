@@ -18,10 +18,10 @@ export const WeightEvaluation = () => {
     }, [setWeightEvaluationRequest])
 
     return (
-        <>
+        <div className="flex flex-col">
             <WeightLengthForm onSubmit={onSubmit} />
             {weightStatusResult?.isOk && <WeightEvaluationResult />}
             {weightStatusResult?.isErr && <div>Error: {weightStatusResult.error.message}</div>}
-        </>
+        </div>
     )
 }

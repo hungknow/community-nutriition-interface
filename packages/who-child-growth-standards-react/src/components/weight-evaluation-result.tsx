@@ -9,16 +9,13 @@ export const WeightEvaluationResult = () => {
     const weightEvaluationRequest = useAtomValue(weightEvaluationRequestAtom)
 
     return (
-        <div>
-            <h1>Weight Evaluation Result</h1>
+        <div className="flex flex-col">
             {/* Display the text according to WeightForLengthEvalulationStatus */}
             {weightStatus?.isOk && <WeightLengthStatus status={weightStatus.value} />}
 
             {/* Display d3js graph */}
             {weightForLengthD3jsChartOptions && <D3JsWeightForLength
                 data={weightForLengthD3jsChartOptions.data}
-                width={weightForLengthD3jsChartOptions.width}
-                height={weightForLengthD3jsChartOptions.height}
                 title={weightForLengthD3jsChartOptions.title}
                 subtitle={weightForLengthD3jsChartOptions.subtitle}
                 xAxisLabel={weightForLengthD3jsChartOptions.xAxisLabel}
