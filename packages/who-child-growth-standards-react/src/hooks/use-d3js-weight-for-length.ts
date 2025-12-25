@@ -43,6 +43,8 @@ export interface UseD3JsWeightForLengthOptions {
   currentLength?: number;
   /** Current weight measurement in kg (Y-axis value) */
   currentWeight?: number;
+  /** Maximum width in pixels for the chart (optional) */
+  maxWidth?: number;
 }
 
 /**
@@ -104,6 +106,7 @@ export function useD3JsWeightForLength(
     colors,
     currentLength,
     currentWeight,
+    maxWidth,
   } = options;
 
   // STEP 1: Use useMeasure hook to track container dimensions
@@ -120,15 +123,16 @@ export function useD3JsWeightForLength(
   }, [measureRef]);
 
   // Always use measured dimensions - no fallback values
-  const effectiveWidth = measuredWidth && measuredWidth > 0 ? measuredWidth : undefined;
-  const measuredEffectiveHeight = measuredHeight && measuredHeight > 0 ? measuredHeight : undefined;
+  // Apply maxWidth constraint if provided
+  let effectiveWidth = measuredWidth && measuredWidth > 0 ? measuredWidth : undefined;
+  if (effectiveWidth !== undefined && maxWidth !== undefined) {
+    effectiveWidth = Math.min(effectiveWidth, maxWidth);
+  }
   
-  // If we have effectiveWidth but effectiveHeight is undefined, calculate it from width using 16:9 ratio
-  // Ratio 16:9 means width:height = 16:9, so height/width = 9/16
-  const ASPECT_RATIO = 3 / 4; // height/width ratio
-  const effectiveHeight = measuredEffectiveHeight !== undefined 
-    ? measuredEffectiveHeight 
-    : (effectiveWidth !== undefined ? effectiveWidth * ASPECT_RATIO : undefined);
+  // effectiveHeight is always calculated from effectiveWidth with a 4/3 ratio
+  // Ratio 4/3 means height/width = 4/3, so height = width * 4/3
+  const ASPECT_RATIO = 3/4; // height/width ratio
+  const effectiveHeight = effectiveWidth !== undefined ? effectiveWidth * ASPECT_RATIO : undefined;
 
   // STEP 2: Memoize the chart options object
   // This prevents creating a new options object on every render

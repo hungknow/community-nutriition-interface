@@ -33,5 +33,14 @@
     "Length must be at least 30 cm": "Length must be at least 30 cm",
     "Length must be at most 120 cm": "Length must be at most 120 cm",
     "Weight must be at least 1 kg": "Weight must be at least 1 kg",
-    "Weight must be at most 26 kg": "Weight must be at most 26 kg"
+    "Weight must be at most 26 kg": "Weight must be at most 26 kg",
+    "weight-length-status.below-sd3-neg": "Underweight, severe",
+    "weight-length-status.between-sd3-neg-and-sd2-neg": "Underweight, moderate",
+    "weight-length-status.between-sd2-neg-and-sd1-neg": "Normal",
+    "weight-length-status.between-sd1-neg-and-sd0": "Normal",
+    "weight-length-status.between-sd0-and-sd1": "Normal",
+    "weight-length-status.between-sd1-and-sd2": "Normal",
+    "weight-length-status.between-sd2-and-sd3": "Overweight",
+    "weight-length-status.above-sd3": "Obese",
+    "weight-length-status.title": "Weight-for-length evaluation result"
 }

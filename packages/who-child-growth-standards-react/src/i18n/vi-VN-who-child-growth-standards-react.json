@@ -33,5 +33,14 @@
     "Length must be at least 30 cm": "Chiều dài phải ít nhất 30 cm",
     "Length must be at most 120 cm": "Chiều dài tối đa 120 cm",
     "Weight must be at least 1 kg": "Cân nặng phải ít nhất 1 kg",
-    "Weight must be at most 26 kg": "Cân nặng tối đa 26 kg"
+    "Weight must be at most 26 kg": "Cân nặng tối đa 26 kg",
+    "weight-length-status.below-sd3-neg": "Suy dinh dưỡng thể gầy còm, mức độ nặng",
+    "weight-length-status.between-sd3-neg-and-sd2-neg": "Suy dinh dưỡnt thể gầy còm, mức độ vừa",
+    "weight-length-status.between-sd2-neg-and-sd1-neg": "Bình thường",
+    "weight-length-status.between-sd1-neg-and-sd0": "Bình thường",
+    "weight-length-status.between-sd0-and-sd1": "Bình thường",
+    "weight-length-status.between-sd1-and-sd2": "Bình thường",
+    "weight-length-status.between-sd2-and-sd3": "Thừa cân",
+    "weight-length-status.above-sd3": "Béo phì",
+    "weight-length-status.title": "Kết quả đánh giá chỉ số cân nặng theo chiều cao với Z-score"
 }

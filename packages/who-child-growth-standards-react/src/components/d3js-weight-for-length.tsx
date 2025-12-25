@@ -48,6 +48,8 @@ export interface D3JsWeightForLengthProps {
   currentLength?: number;
   /** Current weight measurement in kg (Y-axis value) */
   currentWeight?: number;
+  /** Maximum width in pixels for the chart (optional) */
+  maxWidth?: number;
 }
 
 /**
@@ -84,6 +86,7 @@ export const D3JsWeightForLength: React.FC<D3JsWeightForLengthProps> = ({
   style,
   currentLength,
   currentWeight,
+  maxWidth,
 }) => {
   // Use the custom hook to handle all the D3 chart logic
   const { ref, effectiveHeight } = useD3JsWeightForLength({
@@ -98,6 +101,7 @@ export const D3JsWeightForLength: React.FC<D3JsWeightForLengthProps> = ({
     colors,
     currentLength,
     currentWeight,
+    maxWidth,
   });
 
   // Render the container div
@@ -107,6 +111,7 @@ export const D3JsWeightForLength: React.FC<D3JsWeightForLengthProps> = ({
   const containerStyle: React.CSSProperties = {
     width: '100%',
     height: effectiveHeight !== undefined ? `${effectiveHeight}px` : 'auto',
+    ...(maxWidth !== undefined && { maxWidth: `${maxWidth}px` }),
     ...style,
   };
 

@@ -12,19 +12,23 @@ export const WeightEvaluationResult = () => {
         <div className="flex flex-col">
             {/* Display the text according to WeightForLengthEvalulationStatus */}
             {weightStatus?.isOk && <WeightLengthStatus status={weightStatus.value} />}
+            {/*TODO: Link to the graph weight for length */}
 
             {/* Display d3js graph */}
-            {weightForLengthD3jsChartOptions && <D3JsWeightForLength
-                data={weightForLengthD3jsChartOptions.data}
-                title={weightForLengthD3jsChartOptions.title}
-                subtitle={weightForLengthD3jsChartOptions.subtitle}
-                xAxisLabel={weightForLengthD3jsChartOptions.xAxisLabel}
-                yAxisLabel={weightForLengthD3jsChartOptions.yAxisLabel}
-                margins={weightForLengthD3jsChartOptions.margins}
-                showGrid={weightForLengthD3jsChartOptions.showGrid}
-                currentLength={weightEvaluationRequest?.length}
-                currentWeight={weightEvaluationRequest?.weight}
-            />}
+            {weightForLengthD3jsChartOptions &&
+                <div className="flex justify-center"><D3JsWeightForLength
+                    data={weightForLengthD3jsChartOptions.data}
+                    title={weightForLengthD3jsChartOptions.title}
+                    subtitle={weightForLengthD3jsChartOptions.subtitle}
+                    xAxisLabel={weightForLengthD3jsChartOptions.xAxisLabel}
+                    yAxisLabel={weightForLengthD3jsChartOptions.yAxisLabel}
+                    margins={weightForLengthD3jsChartOptions.margins}
+                    showGrid={weightForLengthD3jsChartOptions.showGrid}
+                    currentLength={weightEvaluationRequest?.length}
+                    currentWeight={weightEvaluationRequest?.weight}
+                    maxWidth={800}
+                />
+                </div>}
         </div>
     )
 }
