@@ -121,7 +121,14 @@ export function useD3JsWeightForLength(
 
   // Always use measured dimensions - no fallback values
   const effectiveWidth = measuredWidth && measuredWidth > 0 ? measuredWidth : undefined;
-  const effectiveHeight = measuredHeight && measuredHeight > 0 ? measuredHeight : undefined;
+  const measuredEffectiveHeight = measuredHeight && measuredHeight > 0 ? measuredHeight : undefined;
+  
+  // If we have effectiveWidth but effectiveHeight is undefined, calculate it from width using 16:9 ratio
+  // Ratio 16:9 means width:height = 16:9, so height/width = 9/16
+  const ASPECT_RATIO = 3 / 4; // height/width ratio
+  const effectiveHeight = measuredEffectiveHeight !== undefined 
+    ? measuredEffectiveHeight 
+    : (effectiveWidth !== undefined ? effectiveWidth * ASPECT_RATIO : undefined);
 
   // STEP 2: Memoize the chart options object
   // This prevents creating a new options object on every render

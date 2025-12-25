@@ -102,7 +102,8 @@ export const D3JsWeightForLength: React.FC<D3JsWeightForLengthProps> = ({
 
   // Render the container div
   // This div will be used as the container for the D3 visualization
-  // Make it responsive - always use 100% width and measured height
+  // Make it responsive - always use 100% width and measured/calculated height
+  // The hook calculates effectiveHeight from effectiveWidth when needed
   const containerStyle: React.CSSProperties = {
     width: '100%',
     height: effectiveHeight !== undefined ? `${effectiveHeight}px` : 'auto',
