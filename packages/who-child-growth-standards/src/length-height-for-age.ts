@@ -32,6 +32,15 @@ export function getHeightForAgeDataset(birthDate: Date, gender: Gender): Heighth
     return undefined
 }
 
+export function getLengthOrHeightForAgeDataset(birthDate: Date, gender: Gender): { lengthForAge?: LengthForAge[], heightForAge?: HeighthForAge[] } {
+    const lengthForAge = getLengthForAgeDataset(birthDate, gender)
+    if (lengthForAge) {
+        return { lengthForAge }
+    }
+    const heightForAge = getHeightForAgeDataset(birthDate, gender)
+    return { heightForAge }
+}
+
 // ============================================================================
 // Entry Finder Functions
 // ============================================================================

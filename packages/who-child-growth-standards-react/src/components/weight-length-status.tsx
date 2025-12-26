@@ -33,7 +33,7 @@ export const WeightLengthStatus = ({ status }: WeightLengthStatusProps) => {
     }
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-row gap-2">
             <span className="text-lg">{t('weight-length-status.title')}:</span>
             <span className="text-lg font-bold">{statusText}</span>
         </div>

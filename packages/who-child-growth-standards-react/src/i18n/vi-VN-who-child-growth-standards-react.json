@@ -42,5 +42,20 @@
     "weight-length-status.between-sd1-and-sd2": "Bình thường",
     "weight-length-status.between-sd2-and-sd3": "Thừa cân",
     "weight-length-status.above-sd3": "Béo phì",
-    "weight-length-status.title": "Kết quả đánh giá chỉ số cân nặng theo chiều cao với Z-score"
+    "weight-length-status.title": "Kết quả đánh giá chỉ số cân nặng theo chiều cao với Z-score",
+    "length-or-height-for-age-status.title": "Kết quả đánh giá chiều dài hoặc chiều cao theo tuổi với Z-score",
+    "length-or-height-for-age-status.below-sd3-neg": "Suy dinh dưỡng thể thấp còi, mức độ nặng",
+    "length-or-height-for-age-status.between-sd3-neg-and-sd2-neg": "Suy dinh dưỡnt thể thấp còi, mức độ vừa",
+    "length-or-height-for-age-status.between-sd2-neg-and-sd1-neg": "Bình thường",
+    "length-or-height-for-age-status.between-sd1-neg-and-sd0": "Bình thường",
+    "length-or-height-for-age-status.between-sd0-and-sd1": "Bình thường",
+    "length-or-height-for-age-status.between-sd1-and-sd2": "Bình thường",
+    "length-or-height-for-age-status.between-sd2-and-sd3": "Không có đánh giá",
+    "length-or-height-for-age-status.above-sd3": "Không có đánh giá",
+    "weight-for-length-d3js-chart-options.title": "Đồ thị cân nặng theo chiều dài",
+    "weight-for-length-d3js-chart-options.x-axis-label": "Chiều dài (cm)",
+    "weight-for-length-d3js-chart-options.y-axis-label": "Cân nặng (kg)",
+    "length-or-height-for-age-d3js-chart-options.title": "Đồ thị chiều dài hoặc chiều cao theo tuổi",
+    "length-or-height-for-age-d3js-chart-options.x-axis-label": "Tuổi (tuần)",
+    "length-or-height-for-age-d3js-chart-options.y-axis-label": "Chiều dài hoặc chiều cao (cm)"
 }
