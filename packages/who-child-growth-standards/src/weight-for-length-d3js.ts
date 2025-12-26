@@ -77,7 +77,7 @@ export interface WeightForLengthPointConfig {
 const DEFAULT_OPTIONS: Required<Omit<WeightForLengthChartOptions, "container">> = {
   width: 800,
   height: 600,
-  title: "Weight-for-length",
+  title: "",
   subtitle: "",
   xAxisLabel: "Length (cm)",
   yAxisLabel: "Weight (kg)",

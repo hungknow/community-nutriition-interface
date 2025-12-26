@@ -14,3 +14,11 @@ export function calculateMonthsSinceBirth(birthDate: Date): number {
     
     return totalMonths
 }
+
+export function calculateWeeksBetweenDates(fromDate: Date, toDate: Date): number {
+    const msPerWeek = 7 * 24 * 60 * 60 * 1000;
+    // Calculate difference in milliseconds
+    const diffMs = toDate.getTime() - fromDate.getTime();
+    // Calculate week difference (rounded down)
+    return Math.floor(diffMs / msPerWeek);
+}
