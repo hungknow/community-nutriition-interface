@@ -7,6 +7,7 @@ export default defineConfig({
     "src/styles/globals.css",
     "src/components/ui/**/*.{ts,tsx}",
     "src/lib/**/*.ts",
+    "src/hooks/**/*.ts",
   ],
   format: ["esm"],
   dts: true,
