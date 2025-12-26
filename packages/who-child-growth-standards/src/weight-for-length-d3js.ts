@@ -1,4 +1,4 @@
-import type { WeightForLength } from "./weight-for-length.types";
+import type { WeightForLength } from "./types";
 import * as d3 from "d3";
 
 /**

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { evaluateWeightForLength } from "../src/weight-for-length";
 import { weightForLengthGirlBirthTo2Years } from "../src/weight-for-length-0-to-2-years";
-import { WeightForLengthEvalulationStatus } from "../src/weight-for-length.types";
+import { WeightForLengthEvalulationStatus } from "../src/types";
 
 describe("evaluateWeight", () => {
   describe("with exact length matches", () => {

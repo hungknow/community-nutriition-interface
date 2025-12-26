@@ -2,7 +2,7 @@ import { calculateMonthsSinceBirth } from "./math"
 import { Gender } from "./types"
 import { weightForLengthBoyBirthTo2Years, weightForLengthGirlBirthTo2Years } from "./weight-for-length-0-to-2-years"
 import { weightForLengthBoy2To5Years, weightForLengthGirl2To5Years } from "./weight-for-length-2-to-5-years"
-import { WeightForLengthEvalulationStatus, WeightForLength } from "./weight-for-length.types"
+import { WeightForLengthEvalulationStatus, WeightForLength } from "./types"
 
 export function getWeightForLengthByBirthDate(birthDate: Date, gender: Gender): WeightForLength[] | undefined {
   const age = calculateMonthsSinceBirth(birthDate)
