@@ -1,18 +1,18 @@
-import { calculateMonthsSinceBirth } from "../math"
+import { DAYS_IN_24_MONTHS, DAYS_IN_60_MONTHS } from "../constants"
+import { calculateDaysBetweenDates } from "../math"
 import { Gender, WeightForLengthEvalulationStatus, WeightForLength } from "../types"
 import { weightForLengthBoyBirthTo2Years, weightForLengthGirlBirthTo2Years } from "./weight-for-length-0-to-2-years"
 import { weightForLengthBoy2To5Years, weightForLengthGirl2To5Years } from "./weight-for-length-2-to-5-years"
 
 export function getWeightForLengthByDateOfBirth(birthDate: Date, gender: Gender): WeightForLength[] | undefined {
-  const age = calculateMonthsSinceBirth(birthDate)
-  // 2 years in months
-  if (age <= 24 && gender === Gender.Female) {
+  const days = calculateDaysBetweenDates(birthDate, new Date())
+  if (days <= DAYS_IN_24_MONTHS && gender === Gender.Female) {
     return weightForLengthGirlBirthTo2Years
-  } else if (age <= 60 && gender === Gender.Female) {
+  } else if (days <= DAYS_IN_60_MONTHS && gender === Gender.Female) {
     return weightForLengthGirl2To5Years
-  } else if (age <= 24 && gender === Gender.Male) {
+  } else if (days <= DAYS_IN_24_MONTHS && gender === Gender.Male) {
     return weightForLengthBoyBirthTo2Years
-  } else if (age <= 60 && gender === Gender.Male) {
+  } else if (days <= DAYS_IN_60_MONTHS && gender === Gender.Male) {
     return weightForLengthBoy2To5Years
   }
   return undefined

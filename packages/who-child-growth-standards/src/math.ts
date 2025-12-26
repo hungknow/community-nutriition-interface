@@ -22,3 +22,11 @@ export function calculateWeeksBetweenDates(fromDate: Date, toDate: Date): number
     // Calculate week difference (rounded down)
     return Math.floor(diffMs / msPerWeek);
 }
+
+export function calculateDaysBetweenDates(fromDate: Date, toDate: Date): number {
+    const msPerDay = 24 * 60 * 60 * 1000;
+    // Calculate difference in milliseconds
+    const diffMs = toDate.getTime() - fromDate.getTime();
+    // Calculate day difference (rounded down)
+    return Math.floor(diffMs / msPerDay);
+}

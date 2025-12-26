@@ -1,16 +1,18 @@
 import { lengthForAgeBoy0To13Weeks, lengthForAgeGirl0To13Weeks } from "./length-for-age-0-to-13-weeks"
 import { heightForAgeBoy0To2Years, heightForAgeGirl0To2Years } from "./height-for-age-0-to-2-years"
 import { heightForAgeBoy2To5Years, heightForAgeGirl2To5Years } from "./height-for-age-2-to-5-years"
-import { calculateMonthsSinceBirth, calculateWeeksBetweenDates } from "../math"
+import { DAYS_IN_13_WEEKS, DAYS_IN_5_YEARS, DAYS_IN_24_MONTHS, DAYS_IN_60_MONTHS, DAYS_IN_WEEK, DAYS_IN_MONTH } from "../constants"
+import { calculateDaysBetweenDates } from "../math"
 import { Gender, HeightForAge, LengthForAge, LengthHeightForAgeEvalulationStatus, LengthOrHeightForAgeType } from "../types"
 
 export function getLengthOrHeightForAgeType(birthDate: Date): LengthOrHeightForAgeType {
-    const weeks = calculateWeeksBetweenDates(birthDate, new Date())
-    if (weeks <= 13) {
+    const days = calculateDaysBetweenDates(birthDate, new Date())
+    if (days <= DAYS_IN_13_WEEKS) {
         return LengthOrHeightForAgeType.Length
-    } else if (weeks <= 52) {
+    } else if (days <= DAYS_IN_5_YEARS) {
         return LengthOrHeightForAgeType.Height
     } else {
+        const weeks = Math.floor(days / DAYS_IN_WEEK)
         throw new Error(`Age exceeds 5 years. Cannot evaluate length/height for age ${weeks} weeks (${Math.round(weeks / 52)} years)`);
     }
 }
@@ -20,24 +22,24 @@ export function getLengthOrHeightForAgeType(birthDate: Date): LengthOrHeightForA
 // ============================================================================
 
 export function getLengthForAgeDataset(birthDate: Date, gender: Gender): LengthForAge[] | undefined {
-    const age = calculateMonthsSinceBirth(birthDate)
-    if (age <= 13 && gender === Gender.Female) {
+    const days = calculateDaysBetweenDates(birthDate, new Date())
+    if (days <= DAYS_IN_13_WEEKS && gender === Gender.Female) {
         return lengthForAgeGirl0To13Weeks
-    } else if (age <= 13 && gender === Gender.Male) {
+    } else if (days <= DAYS_IN_13_WEEKS && gender === Gender.Male) {
         return lengthForAgeBoy0To13Weeks
     }
     return undefined
 }
 
 export function getHeightForAgeDataset(birthDate: Date, gender: Gender): HeightForAge[] | undefined {
-    const age = calculateMonthsSinceBirth(birthDate)
-    if (age <= 24 && gender === Gender.Female) {
+    const days = calculateDaysBetweenDates(birthDate, new Date())
+    if (days <= DAYS_IN_24_MONTHS && gender === Gender.Female) {
         return heightForAgeGirl0To2Years
-    } else if (age <= 24 && gender === Gender.Male) {
+    } else if (days <= DAYS_IN_24_MONTHS && gender === Gender.Male) {
         return heightForAgeBoy0To2Years
-    } else if (age <= 60 && gender === Gender.Female) {
+    } else if (days <= DAYS_IN_60_MONTHS && gender === Gender.Female) {
         return heightForAgeGirl2To5Years
-    } else if (age <= 60 && gender === Gender.Male) {
+    } else if (days <= DAYS_IN_60_MONTHS && gender === Gender.Male) {
         return heightForAgeBoy2To5Years
     }
     return undefined
@@ -57,12 +59,14 @@ export function getLengthOrHeightForAgeDataset(birthDate: Date, gender: Gender):
 // ============================================================================
 
 export function findLengthForAgeEntryByDateOfBirth(birthDate: Date, lengthForAge: LengthForAge[]): LengthForAge | undefined {
-    const weeks = calculateWeeksBetweenDates(birthDate, new Date())
+    const days = calculateDaysBetweenDates(birthDate, new Date())
+    const weeks = Math.floor(days / DAYS_IN_WEEK)
     return lengthForAge.find(entry => entry.week === weeks)
 }
 
 export function findHeightForAgeEntryByDateOfBirth(birthDate: Date, heightForAge: HeightForAge[]): HeightForAge | undefined {
-    const months = calculateMonthsSinceBirth(birthDate)
+    const days = calculateDaysBetweenDates(birthDate, new Date())
+    const months = Math.floor(days / DAYS_IN_MONTH)
     return heightForAge.find(entry => entry.month === months)
 }
 

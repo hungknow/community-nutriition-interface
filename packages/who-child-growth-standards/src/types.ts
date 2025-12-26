@@ -114,4 +114,5 @@ export type WeightForAgeDataset =
 export interface GetWeightForAgeParams {
     dateOfBirth: Date;
     gender: Gender;
+    dateOfEvaluation?: Date;
 }
