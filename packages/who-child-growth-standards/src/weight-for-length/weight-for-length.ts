@@ -3,7 +3,7 @@ import { Gender, WeightForLengthEvalulationStatus, WeightForLength } from "../ty
 import { weightForLengthBoyBirthTo2Years, weightForLengthGirlBirthTo2Years } from "./weight-for-length-0-to-2-years"
 import { weightForLengthBoy2To5Years, weightForLengthGirl2To5Years } from "./weight-for-length-2-to-5-years"
 
-export function getWeightForLengthByBirthDate(birthDate: Date, gender: Gender): WeightForLength[] | undefined {
+export function getWeightForLengthByDateOfBirth(birthDate: Date, gender: Gender): WeightForLength[] | undefined {
   const age = calculateMonthsSinceBirth(birthDate)
   // 2 years in months
   if (age <= 24 && gender === Gender.Female) {
@@ -182,7 +182,7 @@ export function evaluateWeightForLength(weight: number, length: number, value: W
 }
 
 export function evaluateWeightSinceBirth(weight: number, length: number, birthDate: Date, gender: Gender): WeightForLengthEvalulationStatus {
-  const weightForLength = getWeightForLengthByBirthDate(birthDate, gender)
+  const weightForLength = getWeightForLengthByDateOfBirth(birthDate, gender)
   if (!weightForLength) {
     throw new Error(`No data found for the birth date ${birthDate} and the gender ${gender}`);
   }

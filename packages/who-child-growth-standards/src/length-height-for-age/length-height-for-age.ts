@@ -56,12 +56,12 @@ export function getLengthOrHeightForAgeDataset(birthDate: Date, gender: Gender):
 // Entry Finder Functions
 // ============================================================================
 
-export function findLengthForAgeEntryByBirthDate(birthDate: Date, lengthForAge: LengthForAge[]): LengthForAge | undefined {
+export function findLengthForAgeEntryByDateOfBirth(birthDate: Date, lengthForAge: LengthForAge[]): LengthForAge | undefined {
     const weeks = calculateWeeksBetweenDates(birthDate, new Date())
     return lengthForAge.find(entry => entry.week === weeks)
 }
 
-export function findHeightForAgeEntryByBirthDate(birthDate: Date, heightForAge: HeightForAge[]): HeightForAge | undefined {
+export function findHeightForAgeEntryByDateOfBirth(birthDate: Date, heightForAge: HeightForAge[]): HeightForAge | undefined {
     const months = calculateMonthsSinceBirth(birthDate)
     return heightForAge.find(entry => entry.month === months)
 }
@@ -125,7 +125,7 @@ export function evaluateHeightAgainstEntry(height: number, entry: HeightForAge):
 // ============================================================================
 
 export function evaluateLengthForAgeFromDataset(length: number, birthDate: Date, lengthForAge: LengthForAge[]): LengthHeightForAgeEvalulationStatus {
-    const lengthForAgeEntry = findLengthForAgeEntryByBirthDate(birthDate, lengthForAge)
+    const lengthForAgeEntry = findLengthForAgeEntryByDateOfBirth(birthDate, lengthForAge)
     if (!lengthForAgeEntry) {
         throw new Error(`No data found for length ${length}cm`);
     }
@@ -133,7 +133,7 @@ export function evaluateLengthForAgeFromDataset(length: number, birthDate: Date,
 }
 
 export function evaluateHeightForAgeFromDataset(height: number, birthDate: Date, heightForAge: HeightForAge[]): LengthHeightForAgeEvalulationStatus {
-    const heightForAgeEntry = findHeightForAgeEntryByBirthDate(birthDate, heightForAge)
+    const heightForAgeEntry = findHeightForAgeEntryByDateOfBirth(birthDate, heightForAge)
     if (!heightForAgeEntry) {
         throw new Error(`No data found for height ${height}cm`);
     }
