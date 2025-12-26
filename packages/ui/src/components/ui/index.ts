@@ -3,4 +3,5 @@ export { Field, FieldLabel, FieldDescription, FieldError, FieldGroup, FieldLegen
 export { Input } from "./input"
 export { Label } from "./label"
 export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor } from "./popover"
+export { RadioGroup, RadioGroupItem } from "./radio-group"
 export { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectScrollDownButton, SelectScrollUpButton, SelectSeparator, SelectTrigger, SelectValue } from "./select"
