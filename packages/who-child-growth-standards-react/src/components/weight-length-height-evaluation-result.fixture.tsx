@@ -1,5 +1,5 @@
 import { createEcosystem, EcosystemProvider } from "@zedux/react";
-import { WeightEvaluationResult } from "./weight-evaluation-result";
+import { WeightLengthHeightEvaluationResult } from "./weight-length-height-evaluation-result";
 import { weightEvaluationRequestAtom } from "@/atoms/weight-evaluation-atom";
 import { Gender } from "who-child-growth-standards";
 
@@ -33,12 +33,12 @@ const ecosystemGirl4Years = createEcosystem({
 export default {
     girl2Years: (
         <EcosystemProvider ecosystem={ecosystemGirl2Years}>
-            <WeightEvaluationResult />
+            <WeightLengthHeightEvaluationResult />
         </EcosystemProvider>
     ),
     girl4Years: (
         <EcosystemProvider ecosystem={ecosystemGirl4Years}>
-            <WeightEvaluationResult />
+            <WeightLengthHeightEvaluationResult />
         </EcosystemProvider>
     )
 }

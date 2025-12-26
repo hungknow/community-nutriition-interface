@@ -2,6 +2,7 @@ import { atom, injectEcosystem } from "@zedux/react";
 import { evaluateWeightSinceBirth, Gender, getWeightForLengthByBirthDate, WeightForLengthEvalulationStatus } from "who-child-growth-standards";
 import { Result } from "@badrap/result";
 import { errorToResult } from "@/utils/badrap-result";
+import { t } from "@/i18n/i18n-functions";
 
 interface WeightEvaluationRequest {
     length: number
@@ -51,10 +52,10 @@ export const weightForLengthD3jsChartOptionsAtom = atom('weight-for-length-d3js-
 
     return {
         data: data,
-        title: "Weight-for-length",
+        title: t('weight-for-length-d3js-chart-options.title'),
         subtitle: undefined,
-        xAxisLabel: "Length (cm)",
-        yAxisLabel: "Weight (kg)",
+        xAxisLabel: t('weight-for-length-d3js-chart-options.x-axis-label'),
+        yAxisLabel: t('weight-for-length-d3js-chart-options.y-axis-label'),
         margins: { top: 60, right: 80, bottom: 60, left: 80 },
         showGrid: true,
         showLegend: true,

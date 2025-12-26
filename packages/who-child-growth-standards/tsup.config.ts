@@ -1,13 +1,14 @@
 import { defineConfig } from "tsup"
 
 export default defineConfig({
-  entry: ["src/index.ts"],
-  format: ["cjs", "esm"],
+  entry: ["src/*.ts"],
+  format: ["esm"],
   dts: true,
-  splitting: false,
+  bundle: false,
+  splitting: true,
   sourcemap: true,
   clean: true,
-  external: ["react", "react-dom", "react/jsx-runtime"],
+  external: [],
   treeshake: true,
   minify: false,
   esbuildOptions(options) {
