@@ -1,5 +1,5 @@
-import { Button, Field, FieldDescription, FieldError, FieldGroup, FieldLabel, Input, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@community-nutrition/ui"
-import { useForm, Controller, UseFormRegister, Control, FieldErrors, SubmitHandler } from "react-hook-form"
+import { Button, Field, FieldDescription, FieldError, FieldGroup, FieldLabel, Input, Label, RadioGroup, RadioGroupItem, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@community-nutrition/ui"
+import { useForm, Controller, UseFormRegister, Control, FieldErrors } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Gender } from "who-child-growth-standards"
@@ -206,24 +206,30 @@ interface GenderFieldProps {
 const GenderField = ({ control, error }: GenderFieldProps) => {
   return (
     <Field data-invalid={!!error}>
-      <FieldLabel htmlFor="gender">{t("gender")}</FieldLabel>
+      <FieldLabel>{t("gender")}</FieldLabel>
       <Controller
         name="gender"
         control={control}
-        defaultValue={Gender.Male}
         render={({ field }) => (
-          <Select
+          <RadioGroup
             value={field.value}
             onValueChange={field.onChange}
+            className="flex flex-row gap-4"
+            aria-invalid={!!error}
           >
-            <SelectTrigger id="gender" aria-invalid={!!error}>
-              <SelectValue placeholder={t("selectAGender")} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value={Gender.Male}>{t("male")}</SelectItem>
-              <SelectItem value={Gender.Female}>{t("female")}</SelectItem>
-            </SelectContent>
-          </Select>
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value={Gender.Male} id="gender-male" />
+              <Label htmlFor="gender-male" className="cursor-pointer">
+                {t("male")}
+              </Label>
+            </div>
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value={Gender.Female} id="gender-female" />
+              <Label htmlFor="gender-female" className="cursor-pointer">
+                {t("female")}
+              </Label>
+            </div>
+          </RadioGroup>
         )}
       />
       {error && <FieldError>{error.message}</FieldError>}
