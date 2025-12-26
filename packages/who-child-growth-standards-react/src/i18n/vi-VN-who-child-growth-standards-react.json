@@ -23,7 +23,7 @@
     "month": "Tháng",
     "year": "Năm",
     "weight(kg)": "Cân nặng (kg)",
-    "length(cm)": "Chiều dài (cm)",
+    "length(cm)": "Chiều dài cho bé dưới 2 tuổi, chiều cao cho bé trên 2 tuổi (cm)",
     "gender": "Giới tính",
     "The recommended length for a child is between 65 cm and 120 cm.": "Chiều dài khuyến nghị cho trẻ em nằm trong khoảng 65 cm đến 120 cm.",
     "The recommended weight for a child is between 1 kg and 26 kg.": "Cân nặng khuyến nghị cho trẻ em nằm trong khoảng 1 kg đến 26 kg.",
