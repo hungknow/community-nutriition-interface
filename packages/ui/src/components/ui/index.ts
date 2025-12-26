@@ -1,4 +1,5 @@
 export { Button, buttonVariants } from "./button"
+export { Calendar, CalendarDayButton } from "./calendar"
 export { Field, FieldLabel, FieldDescription, FieldError, FieldGroup, FieldLegend, FieldSeparator, FieldSet, FieldContent, FieldTitle } from "./field"
 export { Input } from "./input"
 export { Label } from "./label"
