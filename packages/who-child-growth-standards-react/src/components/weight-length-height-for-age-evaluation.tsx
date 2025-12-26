@@ -33,7 +33,7 @@ export const WeightOrLengthOrHeightForAgeEvaluation = () => {
     }, [setWeightEvaluationRequest])
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-4">
             <WeightLengthForm onSubmit={onSubmit} />
             {weightStatusResult?.isOk && <WeightLengthHeightEvaluationResult />}
             {weightStatusResult?.isErr && <div>Error: {weightStatusResult.error.message}</div>}

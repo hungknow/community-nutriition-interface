@@ -1,11 +1,11 @@
 'use client'
 
-import { WeightEvaluation } from "@community-nutrition/who-child-growth-standards-react"
+import { WeightOrLengthOrHeightForAgeEvaluation } from "@community-nutrition/who-child-growth-standards-react"
 
 export const NutritionForm = () => {
     return (
         <div style={{ width: '100%' }}>
-            <WeightEvaluation />
+            <WeightOrLengthOrHeightForAgeEvaluation />
         </div>
     )
 }

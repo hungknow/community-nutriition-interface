@@ -17,13 +17,14 @@ export const WeightLengthHeightEvaluationResult = () => {
     const lengthOrHeightForAgeD3jsChartOptions = useAtomValue(lengthOrHeightForAgeD3jsChartOptionsAtom)
 
     const weightForAgeD3jsChartOptions = useAtomValue(weightForAgeD3jsChartOptionsAtom)
-    const weightForAgeEvaluationRequest = useAtomValue(weightForAgeEvaluationRequestAtom)
 
     return (
         <div className="flex flex-col gap-4">
             {/* Display the text according to WeightForLengthEvalulationStatus */}
-            {weightStatus?.isOk && <WeightLengthStatus status={weightStatus.value} />}
-            {lengthOrHeightEvaluationStatusResult?.isOk && <LengthOrHeightForAgeStatus status={lengthOrHeightEvaluationStatusResult.value} />}
+            <div className="flex flex-col gap-2">
+                {weightStatus?.isOk && <WeightLengthStatus status={weightStatus.value} />}
+                {lengthOrHeightEvaluationStatusResult?.isOk && <LengthOrHeightForAgeStatus status={lengthOrHeightEvaluationStatusResult.value} />}
+            </div>
 
             {/*TODO: Link to the graph weight for length */}
 
