@@ -1,8 +1,8 @@
 import { lengthForAgeBoy0To13Weeks, lengthForAgeGirl0To13Weeks } from "./length-for-age-0-to-13-weeks"
 import { heightForAgeBoy0To2Years, heightForAgeGirl0To2Years } from "./height-for-age-0-to-2-years"
 import { heightForAgeBoy2To5Years, heightForAgeGirl2To5Years } from "./height-for-age-2-to-5-years"
-import { calculateMonthsSinceBirth, calculateWeeksBetweenDates } from "./math"
-import { Gender, HeightForAge, LengthForAge, LengthHeightForAgeEvalulationStatus, LengthOrHeightForAgeType } from "./types"
+import { calculateMonthsSinceBirth, calculateWeeksBetweenDates } from "../math"
+import { Gender, HeightForAge, LengthForAge, LengthHeightForAgeEvalulationStatus, LengthOrHeightForAgeType } from "../types"
 
 export function getLengthOrHeightForAgeType(birthDate: Date): LengthOrHeightForAgeType {
     const weeks = calculateWeeksBetweenDates(birthDate, new Date())

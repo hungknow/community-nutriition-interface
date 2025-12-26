@@ -1,4 +1,4 @@
-import { HeightForAge, LengthForAge } from "./types";
+import { HeightForAge, LengthForAge } from "../types";
 import {
   ALL_Z_SCORE_CURVES,
   drawGrowthChart,

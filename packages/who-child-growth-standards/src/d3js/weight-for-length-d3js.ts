@@ -1,4 +1,4 @@
-import type { WeightForLength } from "./types";
+import type { WeightForLength } from "../types";
 import {
   ALL_Z_SCORE_CURVES,
   drawGrowthChart,

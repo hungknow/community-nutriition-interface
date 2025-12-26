@@ -1,4 +1,4 @@
-import { HeightForAge } from "./types";
+import { HeightForAge } from "../types";
 
 export const heightForAgeGirl2To5Years: HeightForAge[] = [
   { month: 24, l: 1, m: 85.7153, s: 0.03764, sd3neg: 76, sd2neg: 79.3, sd1neg: 82.5, sd0: 85.7, sd1: 88.9, sd2: 92.2, sd3: 95.4 },
