@@ -1,4 +1,4 @@
-import { HeighthForAge, LengthForAge } from "./types";
+import { HeightForAge, LengthForAge } from "./types";
 import {
   ALL_Z_SCORE_CURVES,
   drawGrowthChart,
@@ -114,7 +114,7 @@ const LENGTH_HEIGHT_Z_SCORE_CURVES: readonly ZScoreCurve[] = ALL_Z_SCORE_CURVES.
  * ```
  */
 export function d3js_height_for_age(
-  data: HeighthForAge[],
+  data: HeightForAge[],
   options: HeighthForAgeChartOptions
 ): void {
   // Merge user options with defaults

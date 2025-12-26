@@ -2,7 +2,7 @@ import { lengthForAgeBoy0To13Weeks, lengthForAgeGirl0To13Weeks } from "./length-
 import { heightForAgeBoy0To2Years, heightForAgeGirl0To2Years } from "./height-for-age-0-to-2-years"
 import { heightForAgeBoy2To5Years, heightForAgeGirl2To5Years } from "./height-for-age-2-to-5-years"
 import { calculateMonthsSinceBirth, calculateWeeksBetweenDates } from "./math"
-import { Gender, HeighthForAge, LengthForAge, LengthHeightForAgeEvalulationStatus } from "./types"
+import { Gender, HeightForAge, LengthForAge, LengthHeightForAgeEvalulationStatus } from "./types"
 
 // ============================================================================
 // Data Retrieval Functions
@@ -18,7 +18,7 @@ export function getLengthForAgeDataset(birthDate: Date, gender: Gender): LengthF
     return undefined
 }
 
-export function getHeightForAgeDataset(birthDate: Date, gender: Gender): HeighthForAge[] | undefined {
+export function getHeightForAgeDataset(birthDate: Date, gender: Gender): HeightForAge[] | undefined {
     const age = calculateMonthsSinceBirth(birthDate)
     if (age <= 24 && gender === Gender.Female) {
         return heightForAgeGirl0To2Years
@@ -32,7 +32,7 @@ export function getHeightForAgeDataset(birthDate: Date, gender: Gender): Heighth
     return undefined
 }
 
-export function getLengthOrHeightForAgeDataset(birthDate: Date, gender: Gender): { lengthForAge?: LengthForAge[], heightForAge?: HeighthForAge[] } {
+export function getLengthOrHeightForAgeDataset(birthDate: Date, gender: Gender): { lengthForAge?: LengthForAge[], heightForAge?: HeightForAge[] } {
     const lengthForAge = getLengthForAgeDataset(birthDate, gender)
     if (lengthForAge) {
         return { lengthForAge }
@@ -50,7 +50,7 @@ export function findLengthForAgeEntryByBirthDate(birthDate: Date, lengthForAge: 
     return lengthForAge.find(entry => entry.week === weeks)
 }
 
-export function findHeightForAgeEntryByBirthDate(birthDate: Date, heightForAge: HeighthForAge[]): HeighthForAge | undefined {
+export function findHeightForAgeEntryByBirthDate(birthDate: Date, heightForAge: HeightForAge[]): HeightForAge | undefined {
     const months = calculateMonthsSinceBirth(birthDate)
     return heightForAge.find(entry => entry.month === months)
 }
@@ -84,7 +84,7 @@ export function evaluateLengthAgainstEntry(length: number, entry: LengthForAge):
     return LengthHeightForAgeEvalulationStatus.AboveSd3;
 }
 
-export function evaluateHeightAgainstEntry(height: number, entry: HeighthForAge): LengthHeightForAgeEvalulationStatus {
+export function evaluateHeightAgainstEntry(height: number, entry: HeightForAge): LengthHeightForAgeEvalulationStatus {
     if (height < entry.sd3neg) {
         return LengthHeightForAgeEvalulationStatus.BelowSd3Neg;
     }
@@ -121,7 +121,7 @@ export function evaluateLengthForAgeFromDataset(length: number, birthDate: Date,
     return evaluateLengthAgainstEntry(length, lengthForAgeEntry)
 }
 
-export function evaluateHeightForAgeFromDataset(height: number, birthDate: Date, heightForAge: HeighthForAge[]): LengthHeightForAgeEvalulationStatus {
+export function evaluateHeightForAgeFromDataset(height: number, birthDate: Date, heightForAge: HeightForAge[]): LengthHeightForAgeEvalulationStatus {
     const heightForAgeEntry = findHeightForAgeEntryByBirthDate(birthDate, heightForAge)
     if (!heightForAgeEntry) {
         throw new Error(`No data found for height ${height}cm`);

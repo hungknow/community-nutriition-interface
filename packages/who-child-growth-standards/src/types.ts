@@ -44,7 +44,7 @@ export interface LengthForAge {
 }
 
 // For the child over 13 weeks
-export interface HeighthForAge {
+export interface HeightForAge {
     month: number;
     l: number;
     m: number;

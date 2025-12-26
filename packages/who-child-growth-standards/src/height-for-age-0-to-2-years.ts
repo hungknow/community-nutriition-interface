@@ -1,6 +1,6 @@
-import { HeighthForAge } from "./types";
+import { HeightForAge } from "./types";
 
-export const heightForAgeGirl0To2Years: HeighthForAge[] = [
+export const heightForAgeGirl0To2Years: HeightForAge[] = [
   { month: 0, l: 1, m: 49.1477, s: 0.0379, sd3neg: 43.6, sd2neg: 45.4, sd1neg: 47.3, sd0: 49.1, sd1: 51, sd2: 52.9, sd3: 54.7 },
   { month: 1, l: 1, m: 53.6872, s: 0.0364, sd3neg: 47.8, sd2neg: 49.8, sd1neg: 51.7, sd0: 53.7, sd1: 55.6, sd2: 57.6, sd3: 59.5 },
   { month: 2, l: 1, m: 57.0673, s: 0.03568, sd3neg: 51, sd2neg: 53, sd1neg: 55, sd0: 57.1, sd1: 59.1, sd2: 61.1, sd3: 63.2 },
@@ -28,7 +28,7 @@ export const heightForAgeGirl0To2Years: HeighthForAge[] = [
   { month: 24, l: 1, m: 86.4153, s: 0.03734, sd3neg: 76.7, sd2neg: 80, sd1neg: 83.2, sd0: 86.4, sd1: 89.6, sd2: 92.9, sd3: 96.1 },
 ]
 
-export const heightForAgeBoy0To2Years: HeighthForAge[] = [
+export const heightForAgeBoy0To2Years: HeightForAge[] = [
   { month: 0, l: 1, m: 49.8842, s: 0.03795, sd3neg: 44.2, sd2neg: 46.1, sd1neg: 48, sd0: 49.9, sd1: 51.8, sd2: 53.7, sd3: 55.6 },
   { month: 1, l: 1, m: 54.7244, s: 0.03557, sd3neg: 48.9, sd2neg: 50.8, sd1neg: 52.8, sd0: 54.7, sd1: 56.7, sd2: 58.6, sd3: 60.6 },
   { month: 2, l: 1, m: 58.4249, s: 0.03424, sd3neg: 52.4, sd2neg: 54.4, sd1neg: 56.4, sd0: 58.4, sd1: 60.4, sd2: 62.4, sd3: 64.4 },
