@@ -10,7 +10,7 @@ const ecosystemGirl2Years = createEcosystem({
         weightEvaluationRequestAtomNode.set({
             weight: 10,
             length: 90,
-            birthdate: new Date('2025-01-01'),
+            dateOfBirth: new Date('2025-01-01'),
             gender: Gender.Female
         })
     },
@@ -23,7 +23,7 @@ const ecosystemGirl4Years = createEcosystem({
         weightEvaluationRequestAtomNode.set({
             weight: 10,
             length: 90,
-            birthdate: new Date('2023-01-01'),
+            dateOfBirth: new Date('2023-01-01'),
             gender: Gender.Female
         })
     },

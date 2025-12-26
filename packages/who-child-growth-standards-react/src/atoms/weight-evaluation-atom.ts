@@ -8,7 +8,7 @@ interface WeightEvaluationRequest {
     length: number
     weight: number
     gender: Gender
-    birthdate: Date
+    dateOfBirth: Date
 }
 
 export const weightEvaluationRequestAtom = atom<WeightEvaluationRequest | null>('weight-evaluation', null)
@@ -20,7 +20,7 @@ export const weightStatusAtom = atom('weight-status', () => {
         return undefined
     }
     try {
-        const weightStatus = evaluateWeightSinceBirth(weightEvaluation.weight, weightEvaluation.length, weightEvaluation.birthdate, weightEvaluation.gender)
+        const weightStatus = evaluateWeightSinceBirth(weightEvaluation.weight, weightEvaluation.length, weightEvaluation.dateOfBirth, weightEvaluation.gender)
         return Result.ok(weightStatus)
     } catch (error) {
         return errorToResult<WeightForLengthEvalulationStatus, unknown>(error)
@@ -34,7 +34,7 @@ export const weightForLengthDataAtom = atom('weight-for-length-data', () => {
     if (!weightEvaluation) {
         return undefined
     }
-    const data = getWeightForLengthByBirthDate(weightEvaluation.birthdate, weightEvaluation.gender)
+    const data = getWeightForLengthByBirthDate(weightEvaluation.dateOfBirth, weightEvaluation.gender)
     return data
 })
 

@@ -8,7 +8,7 @@ interface LengthOrHeightForAgeEvaluationRequest {
     lengthOrHeight: number
     weight: number
     gender: Gender
-    birthdate: Date
+    dateOfBirth: Date
 }
 
 export const lengthOrHeightEvaluationRequestAtom = atom<LengthOrHeightForAgeEvaluationRequest | null>('length-or-height-for-age-evaluation', null)
@@ -20,7 +20,7 @@ export const lengthOrHeightEvaluationStatusAtom = atom('length-or-height-for-age
         return undefined
     }
     try {
-        const status = evaluateLengthOrHeightForAge(lengthOrHeightEvaluationRequest.lengthOrHeight, lengthOrHeightEvaluationRequest.birthdate, lengthOrHeightEvaluationRequest.gender)
+        const status = evaluateLengthOrHeightForAge(lengthOrHeightEvaluationRequest.lengthOrHeight, lengthOrHeightEvaluationRequest.dateOfBirth, lengthOrHeightEvaluationRequest.gender)
         return Result.ok(status)
     } catch (error) {
         return errorToResult<LengthHeightForAgeEvalulationStatus, unknown>(error)
@@ -33,7 +33,7 @@ export const lengthOrHeightForAgeTypeAtom = atom('length-or-height-for-age-type'
     if (!lengthOrHeightEvaluationRequest) {
         return undefined
     }
-    return getLengthOrHeightForAgeType(lengthOrHeightEvaluationRequest.birthdate)
+    return getLengthOrHeightForAgeType(lengthOrHeightEvaluationRequest.dateOfBirth)
 })
 
 export const lengthOrHeightDatasetAtom = atom('length-or-height-for-age-data', () => {
@@ -48,13 +48,13 @@ export const lengthOrHeightDatasetAtom = atom('length-or-height-for-age-data', (
     }
     if (lengthOrHeightForAgeType == LengthOrHeightForAgeType.Length) {
         return {
-            lengthForAge: getLengthForAgeDataset(lengthOrHeightEvaluationRequest.birthdate, lengthOrHeightEvaluationRequest.gender),
+            lengthForAge: getLengthForAgeDataset(lengthOrHeightEvaluationRequest.dateOfBirth, lengthOrHeightEvaluationRequest.gender),
             heightForAge: undefined,
         }
     } else {
         return {
             lengthForAge: undefined,
-            heightForAge: getHeightForAgeDataset(lengthOrHeightEvaluationRequest.birthdate, lengthOrHeightEvaluationRequest.gender),
+            heightForAge: getHeightForAgeDataset(lengthOrHeightEvaluationRequest.dateOfBirth, lengthOrHeightEvaluationRequest.gender),
         }
     }
 })
@@ -86,7 +86,7 @@ export const lengthOrHeightForAgeD3jsChartOptionsAtom = atom('length-or-height-f
             subtitle: undefined,
             xAxisLabel: t('length-or-height-for-age-d3js-chart-options.x-axis-label-weeks'),
             yAxisLabel: t('length-or-height-for-age-d3js-chart-options.y-axis-label'),
-            currentAge: calculateMonthsSinceBirth(weightEvaluation.birthdate),
+            currentAge: calculateMonthsSinceBirth(weightEvaluation.dateOfBirth),
             currentLengthOrHeight: weightEvaluation.lengthOrHeight,
         }
     } else {
@@ -98,7 +98,7 @@ export const lengthOrHeightForAgeD3jsChartOptionsAtom = atom('length-or-height-f
             subtitle: undefined,
             xAxisLabel: t('length-or-height-for-age-d3js-chart-options.x-axis-label-months'),
             yAxisLabel: t('length-or-height-for-age-d3js-chart-options.y-axis-label'),
-            currentAge: calculateMonthsSinceBirth(weightEvaluation.birthdate),
+            currentAge: calculateMonthsSinceBirth(weightEvaluation.dateOfBirth),
             currentLengthOrHeight: weightEvaluation.lengthOrHeight,
         }
     }

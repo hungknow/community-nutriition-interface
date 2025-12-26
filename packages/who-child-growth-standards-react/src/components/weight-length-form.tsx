@@ -1,10 +1,12 @@
-import { Button, Field, FieldDescription, FieldError, FieldGroup, FieldLabel, Input, Label, RadioGroup, RadioGroupItem, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@community-nutrition/ui"
+import { Button, Calendar, Field, FieldDescription, FieldError, FieldGroup, FieldLabel, Input, Label, Popover, PopoverContent, PopoverTrigger, RadioGroup, RadioGroupItem, convertI18nLanguageToDateFnsLocale} from "@community-nutrition/ui"
 import { useForm, Controller, UseFormRegister, Control, FieldErrors } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Gender } from "who-child-growth-standards"
 import { useTranslation } from "react-i18next"
 import { t } from "@/i18n/i18n-functions"
+import { ChevronDownIcon } from "lucide-react"
+import * as React from "react"
 
 const weightLengthSchema = z.object({
   length: z
@@ -29,8 +31,8 @@ const weightLengthSchema = z.object({
     .refine((val) => val <= 26, {
       message: t("Weight must be at most 26 kg"),
     }),
-  birthdate: z.date({
-    message: t("Birthdate is required"),
+  dateOfBirth: z.date({
+    message: t("Date of birth is required"),
   }),
   gender: z.enum([Gender.Male, Gender.Female]),
 })
@@ -92,104 +94,59 @@ const WeightField = ({ register, error }: WeightFieldProps) => {
   )
 }
 
-interface BirthdateFieldProps {
+interface DateOfBirthFieldProps {
   control: Control<WeightLengthFormData>
-  error?: FieldErrors<WeightLengthFormData>["birthdate"]
+  error?: FieldErrors<WeightLengthFormData>["dateOfBirth"]
 }
 
-const MONTHS = [
-  t("january"),
-  t("february"),
-  t("march"),
-  t("april"),
-  t("may"),
-  t("june"),
-  t("july"),
-  t("august"),
-  t("september"),
-  t("october"),
-  t("november"),
-  t("december"),
-] as const
+const DateOfBirthField = ({ control, error }: DateOfBirthFieldProps) => {
+  const [open, setOpen] = React.useState(false)
+  const { i18n } = useTranslation()
 
-const getYears = () => {
-  const currentYear = new Date().getFullYear()
-  const minYear = currentYear - 4 // Only accept children 5 years old or less
-  const years: number[] = []
-  for (let year = minYear; year <= currentYear; year++) {
-    years.push(year)
-  }
-  return years.reverse() // Most recent years first
-}
-
-const BirthdateField = ({ control, error }: BirthdateFieldProps) => {
-  const years = getYears()
+  // Get the current locale from i18n, fallback to enUS if not found
+  const calendarLocale = convertI18nLanguageToDateFnsLocale(i18n.language)
 
   return (
     <Field data-invalid={!!error}>
-      <FieldLabel htmlFor="birthdate">{t("birthdate")}</FieldLabel>
+      <FieldLabel htmlFor="dateOfBirth">{t("dateOfBirth")}</FieldLabel>
       <Controller
-        name="birthdate"
+        name="dateOfBirth"
         control={control}
         render={({ field }) => {
-          const currentMonth = field.value ? field.value.getMonth() : null
-          const currentYear = field.value ? field.value.getFullYear() : null
-
-          const handleMonthChange = (monthIndex: string) => {
-            const month = parseInt(monthIndex, 10)
-            const year = currentYear || new Date().getFullYear()
-            const newDate = new Date(year, month, 1)
-            field.onChange(newDate)
-          }
-
-          const handleYearChange = (yearStr: string) => {
-            const year = parseInt(yearStr, 10)
-            const month = currentMonth !== null ? currentMonth : 0
-            const newDate = new Date(year, month, 1)
-            field.onChange(newDate)
-          }
+          const currentDate = new Date()
+          const maxDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())
+          const minDate = new Date(currentDate.getFullYear() - 5, 0, 1) // Only accept children 5 years old or less
 
           return (
-            <div className="flex gap-2">
-              <Select
-                value={currentMonth !== null ? currentMonth.toString() : ""}
-                onValueChange={handleMonthChange}
-              >
-                <SelectTrigger
-                  id="birthdate-month"
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  id="dateOfBirth"
                   aria-invalid={!!error}
-                  className="flex-1"
+                  className="w-full justify-between font-normal"
                 >
-                  <SelectValue placeholder={t("month")} />
-                </SelectTrigger>
-                <SelectContent>
-                  {MONTHS.map((month, index) => (
-                    <SelectItem key={month} value={index.toString()}>
-                      {month}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Select
-                value={currentYear !== null ? currentYear.toString() : ""}
-                onValueChange={handleYearChange}
-              >
-                <SelectTrigger
-                  id="birthdate-year"
-                  aria-invalid={!!error}
-                  className="flex-1"
-                >
-                  <SelectValue placeholder={t("year")} />
-                </SelectTrigger>
-                <SelectContent>
-                  {years.map((year) => (
-                    <SelectItem key={year} value={year.toString()}>
-                      {year}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+                  {field.value ? field.value.toLocaleDateString(i18n.language) : t("selectDate")}
+                  <ChevronDownIcon />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+                <Calendar
+                  mode="single"
+                  required={true}
+                  selected={field.value}
+                  captionLayout="dropdown"
+                  locale={calendarLocale}
+                  disabled={(date: Date) => {
+                    return date > maxDate || date < minDate
+                  }}
+                  onSelect={(date: Date) => {
+                    field.onChange(date)
+                    setOpen(false)
+                  }}
+                />
+              </PopoverContent>
+            </Popover>
           )
         }}
       />
@@ -260,7 +217,7 @@ export const WeightLengthForm = ({ onSubmit }: WeightLengthFormProps) => {
 
         <LengthField register={register} error={errors.length} />
         <WeightField register={register} error={errors.weight} />
-        <BirthdateField control={control} error={errors.birthdate} />
+        <DateOfBirthField control={control} error={errors.dateOfBirth} />
         <GenderField control={control} error={errors.gender} />
 
         <Field orientation="horizontal">

@@ -15,13 +15,13 @@ export const WeightOrLengthOrHeightForAgeEvaluation = () => {
         setWeightEvaluationRequest({
             weight: data.weight,
             length: data.length,
-            birthdate: data.birthdate,
+            dateOfBirth: data.dateOfBirth,
             gender: data.gender
         })
         setLengthOrHeightEvaluationRequest({
             lengthOrHeight: data.length,
             weight: data.weight,
-            birthdate: data.birthdate,
+            dateOfBirth: data.dateOfBirth,
             gender: data.gender
         })
     }, [setWeightEvaluationRequest])
