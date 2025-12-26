@@ -1,5 +1,5 @@
 import { atom, injectEcosystem } from "@zedux/react";
-import { evaluateWeightSinceBirth, Gender, getWeightForLengthByBirthDate, WeightForLengthEvalulationStatus } from "who-child-growth-standards";
+import { evaluateWeightSinceBirth, Gender, getWeightForLengthByDateOfBirth, WeightForLengthEvalulationStatus } from "who-child-growth-standards";
 import { Result } from "@badrap/result";
 import { errorToResult } from "@/utils/badrap-result";
 import { t } from "@/i18n/i18n-functions";
@@ -34,7 +34,7 @@ export const weightForLengthDataAtom = atom('weight-for-length-data', () => {
     if (!weightEvaluation) {
         return undefined
     }
-    const data = getWeightForLengthByBirthDate(weightEvaluation.dateOfBirth, weightEvaluation.gender)
+    const data = getWeightForLengthByDateOfBirth(weightEvaluation.dateOfBirth, weightEvaluation.gender)
     return data
 })
 

@@ -4,10 +4,12 @@ import { WeightLengthForm, WeightLengthFormData } from "./weight-length-form"
 import { useAtomState, useAtomValue } from "@zedux/react"
 import { WeightLengthHeightEvaluationResult } from "./weight-length-height-evaluation-result"
 import { lengthOrHeightEvaluationRequestAtom } from "@/atoms/length-height-evaluation-atom"
+import { weightForAgeEvaluationRequestAtom } from "@/atoms/weight-for-age-evaluation-atom"
 
 export const WeightOrLengthOrHeightForAgeEvaluation = () => {
     const [, setWeightEvaluationRequest] = useAtomState(weightEvaluationRequestAtom)
     const [, setLengthOrHeightEvaluationRequest] = useAtomState(lengthOrHeightEvaluationRequestAtom)
+    const [, setWeightForAgeEvaluationRequest] = useAtomState(weightForAgeEvaluationRequestAtom)
 
     const weightStatusResult = useAtomValue(weightStatusAtom)
 
@@ -15,13 +17,17 @@ export const WeightOrLengthOrHeightForAgeEvaluation = () => {
         setWeightEvaluationRequest({
             weight: data.weight,
             length: data.length,
-            dateOfBirth: data.dateOfBirth,
+            dateOfBirth: data.DateOfBirth,
             gender: data.gender
         })
         setLengthOrHeightEvaluationRequest({
             lengthOrHeight: data.length,
+            dateOfBirth: data.DateOfBirth,
+            gender: data.gender
+        })
+        setWeightForAgeEvaluationRequest({
             weight: data.weight,
-            dateOfBirth: data.dateOfBirth,
+            dateOfBirth: data.DateOfBirth,
             gender: data.gender
         })
     }, [setWeightEvaluationRequest])

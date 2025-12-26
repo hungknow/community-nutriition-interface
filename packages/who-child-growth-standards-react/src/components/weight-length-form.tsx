@@ -31,7 +31,7 @@ const weightLengthSchema = z.object({
     .refine((val) => val <= 26, {
       message: t("Weight must be at most 26 kg"),
     }),
-  dateOfBirth: z.date({
+  DateOfBirth: z.date({
     message: t("Date of birth is required"),
   }),
   gender: z.enum([Gender.Male, Gender.Female]),
@@ -96,7 +96,7 @@ const WeightField = ({ register, error }: WeightFieldProps) => {
 
 interface DateOfBirthFieldProps {
   control: Control<WeightLengthFormData>
-  error?: FieldErrors<WeightLengthFormData>["dateOfBirth"]
+  error?: FieldErrors<WeightLengthFormData>["DateOfBirth"]
 }
 
 const DateOfBirthField = ({ control, error }: DateOfBirthFieldProps) => {
@@ -108,9 +108,9 @@ const DateOfBirthField = ({ control, error }: DateOfBirthFieldProps) => {
 
   return (
     <Field data-invalid={!!error}>
-      <FieldLabel htmlFor="dateOfBirth">{t("dateOfBirth")}</FieldLabel>
+      <FieldLabel htmlFor="DateOfBirth">{t("DateOfBirth")}</FieldLabel>
       <Controller
-        name="dateOfBirth"
+        name="DateOfBirth"
         control={control}
         render={({ field }) => {
           const currentDate = new Date()
@@ -122,7 +122,7 @@ const DateOfBirthField = ({ control, error }: DateOfBirthFieldProps) => {
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
-                  id="dateOfBirth"
+                  id="DateOfBirth"
                   aria-invalid={!!error}
                   className="w-full justify-between font-normal"
                 >
@@ -204,7 +204,6 @@ export const WeightLengthForm = ({ onSubmit }: WeightLengthFormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<WeightLengthFormData>({
     resolver: zodResolver(weightLengthSchema),
-    // resolver: yupResolver(weightLengthSchemaYup),
     mode: "onSubmit",
     defaultValues: {
       gender: Gender.Male,
@@ -217,7 +216,7 @@ export const WeightLengthForm = ({ onSubmit }: WeightLengthFormProps) => {
 
         <LengthField register={register} error={errors.length} />
         <WeightField register={register} error={errors.weight} />
-        <DateOfBirthField control={control} error={errors.dateOfBirth} />
+        <DateOfBirthField control={control} error={errors.DateOfBirth} />
         <GenderField control={control} error={errors.gender} />
 
         <Field orientation="horizontal">

@@ -2,11 +2,10 @@ import { t } from "@/i18n/i18n-functions"
 import { errorToResult } from "@/utils/badrap-result"
 import { Result } from "@badrap/result"
 import { atom, injectEcosystem } from "@zedux/react"
-import { calculateMonthsSinceBirth, evaluateLengthOrHeightForAge, Gender, getHeightForAgeDataset, getLengthForAgeDataset, getLengthOrHeightForAgeDataset, getLengthOrHeightForAgeType, LengthHeightForAgeEvalulationStatus, LengthOrHeightForAgeType } from "who-child-growth-standards"
+import { calculateMonthsSinceBirth, evaluateLengthOrHeightForAge, Gender, getHeightForAgeDataset, getLengthForAgeDataset, getLengthOrHeightForAgeType, LengthHeightForAgeEvalulationStatus, LengthOrHeightForAgeType } from "who-child-growth-standards"
 
 interface LengthOrHeightForAgeEvaluationRequest {
     lengthOrHeight: number
-    weight: number
     gender: Gender
     dateOfBirth: Date
 }

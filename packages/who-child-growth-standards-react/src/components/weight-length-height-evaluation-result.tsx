@@ -5,6 +5,8 @@ import { D3JsWeightForLength } from "./d3js-weight-for-length"
 import { lengthOrHeightEvaluationStatusAtom, lengthOrHeightForAgeD3jsChartOptionsAtom } from "@/atoms/length-height-evaluation-atom"
 import { LengthOrHeightForAgeStatus } from "./length-or-height-for-age-status"
 import { D3JsLengthOrHeightForAge } from "./d3js-length-or-height-for-age"
+import { weightForAgeD3jsChartOptionsAtom, weightForAgeEvaluationRequestAtom } from "@/atoms/weight-for-age-evaluation-atom"
+import { D3JsWeightForAge } from "./d3js-weight-for-age"
 
 export const WeightLengthHeightEvaluationResult = () => {
     const weightStatus = useAtomValue(weightStatusAtom)
@@ -13,6 +15,9 @@ export const WeightLengthHeightEvaluationResult = () => {
     
     const lengthOrHeightEvaluationStatusResult = useAtomValue(lengthOrHeightEvaluationStatusAtom)
     const lengthOrHeightForAgeD3jsChartOptions = useAtomValue(lengthOrHeightForAgeD3jsChartOptionsAtom)
+
+    const weightForAgeD3jsChartOptions = useAtomValue(weightForAgeD3jsChartOptionsAtom)
+    const weightForAgeEvaluationRequest = useAtomValue(weightForAgeEvaluationRequestAtom)
 
     return (
         <div className="flex flex-col gap-4">
@@ -50,6 +55,21 @@ export const WeightLengthHeightEvaluationResult = () => {
                     maxWidth={800}
                     currentAge={lengthOrHeightForAgeD3jsChartOptions.currentAge}
                     currentLengthOrHeight={lengthOrHeightForAgeD3jsChartOptions.currentLengthOrHeight}
+                />
+                </div>}
+
+            {weightForAgeD3jsChartOptions &&
+                <div className="flex justify-center"><D3JsWeightForAge
+                    data={weightForAgeD3jsChartOptions.data}
+                    title={weightForAgeD3jsChartOptions.title}
+                    subtitle={weightForAgeD3jsChartOptions.subtitle}
+                    xAxisLabel={weightForAgeD3jsChartOptions.xAxisLabel}
+                    yAxisLabel={weightForAgeD3jsChartOptions.yAxisLabel}
+                    showGrid={weightForAgeD3jsChartOptions.showGrid}
+                    showLegend={weightForAgeD3jsChartOptions.showLegend}
+                    maxWidth={800}
+                    dateOfBirth={weightForAgeD3jsChartOptions.dateOfBirth}
+                    currentWeight={weightForAgeD3jsChartOptions.currentWeight}
                 />
                 </div>}
         </div>

@@ -19,7 +19,7 @@
     "male": "Nam",
     "female": "Nữ",
     "selectAGender": "Chọn giới tính",
-    "dateOfBirth": "Ngày sinh",
+    "DateOfBirth": "Ngày sinh",
     "selectDate": "Chọn ngày",
     "month": "Tháng",
     "year": "Năm",
@@ -60,5 +60,10 @@
     "length-or-height-for-age-d3js-chart-options.title-height": "Đồ thị chiều cao theo tuổi",
     "length-or-height-for-age-d3js-chart-options.x-axis-label-weeks": "Tuổi (tuần)",
     "length-or-height-for-age-d3js-chart-options.x-axis-label-months": "Tuổi (tháng)",
-    "length-or-height-for-age-d3js-chart-options.y-axis-label": "Chiều dài hoặc chiều cao (cm)"
+    "length-or-height-for-age-d3js-chart-options.y-axis-label": "Chiều dài hoặc chiều cao (cm)",
+    "weight-for-age-d3js-chart-options.title-week": "Đồ thị cân nặng theo tuổi",
+    "weight-for-age-d3js-chart-options.x-axis-label-week": "Tuổi (tuần)",
+    "weight-for-age-d3js-chart-options.title-month": "Đồ thị cân nặng theo tuổi",
+    "weight-for-age-d3js-chart-options.x-axis-label-month": "Tuổi (tháng)",
+    "weight-for-age-d3js-chart-options.y-axis-label-weight": "Cân nặng (kg)"
 }

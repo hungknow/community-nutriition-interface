@@ -19,7 +19,7 @@
     "male": "Male",
     "female": "Female",
     "selectAGender": "Select a gender",
-    "dateOfBirth": "Date of birth",
+    "DateOfBirth": "Date of birth",
     "selectDate": "Select date",
     "month": "Month",
     "year": "Year",
@@ -60,5 +60,10 @@
     "length-or-height-for-age-d3js-chart-options.title-height": "Height for age chart",
     "length-or-height-for-age-d3js-chart-options.x-axis-label-weeks": "Age (weeks)",
     "length-or-height-for-age-d3js-chart-options.x-axis-label-months": "Age (months)",
-    "length-or-height-for-age-d3js-chart-options.y-axis-label": "Length or height (cm)"
+    "length-or-height-for-age-d3js-chart-options.y-axis-label": "Length or height (cm)",
+    "weight-for-age-d3js-chart-options.title-week": "Weight for age chart",
+    "weight-for-age-d3js-chart-options.x-axis-label-week": "Age (weeks)",
+    "weight-for-age-d3js-chart-options.title-month": "Weight for age chart",
+    "weight-for-age-d3js-chart-options.x-axis-label-month": "Age (months)",
+    "weight-for-age-d3js-chart-options.y-axis-label-weight": "Weight (kg)"
 }
