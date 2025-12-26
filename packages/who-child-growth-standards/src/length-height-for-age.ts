@@ -2,7 +2,18 @@ import { lengthForAgeBoy0To13Weeks, lengthForAgeGirl0To13Weeks } from "./length-
 import { heightForAgeBoy0To2Years, heightForAgeGirl0To2Years } from "./height-for-age-0-to-2-years"
 import { heightForAgeBoy2To5Years, heightForAgeGirl2To5Years } from "./height-for-age-2-to-5-years"
 import { calculateMonthsSinceBirth, calculateWeeksBetweenDates } from "./math"
-import { Gender, HeightForAge, LengthForAge, LengthHeightForAgeEvalulationStatus } from "./types"
+import { Gender, HeightForAge, LengthForAge, LengthHeightForAgeEvalulationStatus, LengthOrHeightForAgeType } from "./types"
+
+export function getLengthOrHeightForAgeType(birthDate: Date): LengthOrHeightForAgeType {
+    const weeks = calculateWeeksBetweenDates(birthDate, new Date())
+    if (weeks <= 13) {
+        return LengthOrHeightForAgeType.Length
+    } else if (weeks <= 52) {
+        return LengthOrHeightForAgeType.Height
+    } else {
+        throw new Error(`Age exceeds 5 years. Cannot evaluate length/height for age ${weeks} weeks (${Math.round(weeks / 52)} years)`);
+    }
+}
 
 // ============================================================================
 // Data Retrieval Functions
@@ -135,19 +146,9 @@ export function evaluateHeightForAgeFromDataset(height: number, birthDate: Date,
 
 export function evaluateLengthOrHeightForAge(lengthOrHeight: number, birthDate: Date, gender: Gender): LengthHeightForAgeEvalulationStatus {
     // First determine if we should evaluate by weeks (length) or months (height)
-    const ageInWeeks = calculateWeeksBetweenDates(birthDate, new Date())
+    const lengthOrHeightForAgeType = getLengthOrHeightForAgeType(birthDate)
 
-    // Don't evaluate if age is over 5 years (260 weeks)
-    const fiveYearsInWeeks = 5 * 52
-    if (ageInWeeks > fiveYearsInWeeks) {
-        throw new Error(`Age exceeds 5 years. Cannot evaluate length/height for age ${ageInWeeks} weeks (${Math.round(ageInWeeks / 52)} years)`);
-    }
-
-    // Length is used for ages 0-13 weeks
-    // Height is used for ages > 13 weeks
-    const shouldUseLength = ageInWeeks <= 13
-
-    if (shouldUseLength) {
+    if (lengthOrHeightForAgeType == LengthOrHeightForAgeType.Length) {
         const lengthForAge = getLengthForAgeDataset(birthDate, gender)
         if (!lengthForAge) {
             throw new Error(`No length data found for the birth date ${birthDate} and the gender ${gender}`);

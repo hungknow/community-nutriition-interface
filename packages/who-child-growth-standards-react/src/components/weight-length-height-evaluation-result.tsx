@@ -40,16 +40,16 @@ export const WeightLengthHeightEvaluationResult = () => {
 
             {lengthOrHeightForAgeD3jsChartOptions &&
                 <div className="flex justify-center"><D3JsLengthOrHeightForAge
+                    lengthOrHeightForAgeType={lengthOrHeightForAgeD3jsChartOptions.lengthOrHeightForAgeType}
                     lengthForAgeDataset={lengthOrHeightForAgeD3jsChartOptions.lengthForAgeDataset}
                     heightForAgeDataset={lengthOrHeightForAgeD3jsChartOptions.heightForAgeDataset}
                     title={lengthOrHeightForAgeD3jsChartOptions.title}
                     subtitle={lengthOrHeightForAgeD3jsChartOptions.subtitle}
                     xAxisLabel={lengthOrHeightForAgeD3jsChartOptions.xAxisLabel}
                     yAxisLabel={lengthOrHeightForAgeD3jsChartOptions.yAxisLabel}
-                    margins={lengthOrHeightForAgeD3jsChartOptions.margins}
-                    showGrid={lengthOrHeightForAgeD3jsChartOptions.showGrid}
-                    showLegend={lengthOrHeightForAgeD3jsChartOptions.showLegend}
                     maxWidth={800}
+                    currentAge={lengthOrHeightForAgeD3jsChartOptions.currentAge}
+                    currentLengthOrHeight={lengthOrHeightForAgeD3jsChartOptions.currentLengthOrHeight}
                 />
                 </div>}
         </div>

@@ -55,7 +55,9 @@
     "weight-for-length-d3js-chart-options.title": "Đồ thị cân nặng theo chiều dài",
     "weight-for-length-d3js-chart-options.x-axis-label": "Chiều dài (cm)",
     "weight-for-length-d3js-chart-options.y-axis-label": "Cân nặng (kg)",
-    "length-or-height-for-age-d3js-chart-options.title": "Đồ thị chiều dài hoặc chiều cao theo tuổi",
-    "length-or-height-for-age-d3js-chart-options.x-axis-label": "Tuổi (tuần)",
+    "length-or-height-for-age-d3js-chart-options.title-length": "Đồ thị chiều dài theo tuổi",
+    "length-or-height-for-age-d3js-chart-options.title-height": "Đồ thị chiều cao theo tuổi",
+    "length-or-height-for-age-d3js-chart-options.x-axis-label-weeks": "Tuổi (tuần)",
+    "length-or-height-for-age-d3js-chart-options.x-axis-label-months": "Tuổi (tháng)",
     "length-or-height-for-age-d3js-chart-options.y-axis-label": "Chiều dài hoặc chiều cao (cm)"
 }

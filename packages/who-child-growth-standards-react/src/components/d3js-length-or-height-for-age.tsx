@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import type { LengthForAge, HeighthForAge } from "who-child-growth-standards";
+import type { HeightForAge, LengthForAge, LengthOrHeightForAgeType } from "who-child-growth-standards";
 import { useD3JsLengthOrHeightForAge } from "../hooks/use-d3js-length-or-height-for-age";
 
 /**
@@ -12,10 +12,13 @@ import { useD3JsLengthOrHeightForAge } from "../hooks/use-d3js-length-or-height-
  * track changes and prevent unnecessary re-renders.
  */
 export interface D3JsLengthOrHeightForAgeProps {
+  /** Type of length or height for age */
+  lengthOrHeightForAgeType: LengthOrHeightForAgeType;
+
   /** Array of LengthForAge data points to render (for children under 13 weeks) */
   lengthForAgeDataset?: LengthForAge[];
-  /** Array of HeighthForAge data points to render (for children over 13 weeks) */
-  heightForAgeDataset?: HeighthForAge[];
+  /** Array of HeightForAge data points to render (for children over 13 weeks) */
+  heightForAgeDataset?: HeightForAge[];
 
   /** Chart title */
   title?: string;
@@ -46,7 +49,7 @@ export interface D3JsLengthOrHeightForAgeProps {
   className?: string;
   /** Optional inline styles for the container div */
   style?: React.CSSProperties;
-  /** Current age in weeks (for LengthForAge) or months (for HeighthForAge) */
+  /** Current age in weeks (for LengthForAge) or months (for HeightForAge) */
   currentAge?: number;
   /** Current length or height measurement in cm (Y-axis value) */
   currentLengthOrHeight?: number;
@@ -78,6 +81,7 @@ export interface D3JsLengthOrHeightForAgeProps {
  * ```
  */
 export const D3JsLengthOrHeightForAge: React.FC<D3JsLengthOrHeightForAgeProps> = ({
+  lengthOrHeightForAgeType,
   lengthForAgeDataset,
   heightForAgeDataset,
   title,
@@ -96,6 +100,7 @@ export const D3JsLengthOrHeightForAge: React.FC<D3JsLengthOrHeightForAgeProps> =
 }) => {
   // Use the custom hook to handle all the D3 chart logic
   const { ref, effectiveHeight } = useD3JsLengthOrHeightForAge({
+    lengthOrHeightForAgeType,
     lengthForAgeDataset,
     heightForAgeDataset,
     title,

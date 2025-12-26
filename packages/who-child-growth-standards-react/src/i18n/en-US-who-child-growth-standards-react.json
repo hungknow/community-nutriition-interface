@@ -55,7 +55,9 @@
     "weight-for-length-d3js-chart-options.title": "Weight for length chart",
     "weight-for-length-d3js-chart-options.x-axis-label": "Length (cm)",
     "weight-for-length-d3js-chart-options.y-axis-label": "Weight (kg)",
-    "length-or-height-for-age-d3js-chart-options.title": "Length or height for age chart",
-    "length-or-height-for-age-d3js-chart-options.x-axis-label": "Age (weeks)",
+    "length-or-height-for-age-d3js-chart-options.title-length": "Length for age chart",
+    "length-or-height-for-age-d3js-chart-options.title-height": "Height for age chart",
+    "length-or-height-for-age-d3js-chart-options.x-axis-label-weeks": "Age (weeks)",
+    "length-or-height-for-age-d3js-chart-options.x-axis-label-months": "Age (months)",
     "length-or-height-for-age-d3js-chart-options.y-axis-label": "Length or height (cm)"
 }

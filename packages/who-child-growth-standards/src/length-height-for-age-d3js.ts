@@ -77,7 +77,7 @@ const DEFAULT_LENGTH_FOR_AGE_OPTIONS: Required<Omit<LengthForAgeChartOptions, "c
 /**
  * Z-score curves for length/height-for-age charts (excluding -1SD and +1SD)
  */
-const LENGTH_HEIGHT_Z_SCORE_CURVES: readonly ZScoreCurve[] = ALL_Z_SCORE_CURVES.filter(
+export const LENGTH_HEIGHT_Z_SCORE_CURVES: readonly ZScoreCurve[] = ALL_Z_SCORE_CURVES.filter(
   (curve) => curve.key !== "sd1neg" && curve.key !== "sd1"
 );
 
@@ -95,7 +95,7 @@ const LENGTH_HEIGHT_Z_SCORE_CURVES: readonly ZScoreCurve[] = ALL_Z_SCORE_CURVES.
  * - X-axis: month field (age in months)
  * - Y-axis: pre-calculated height values from sd3neg, sd2neg, sd0, sd2, sd3 fields
  * 
- * @param data - Array of HeighthForAge objects containing:
+ * @param data - Array of HeightForAge objects containing:
  *               - month: age in months - used for X-axis
  *               - sd3neg, sd2neg, sd0, sd2, sd3: pre-calculated height values (cm) - used for Y-axis
  * @param options - Configuration options for customizing the chart appearance

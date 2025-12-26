@@ -2,7 +2,7 @@ import { t } from "@/i18n/i18n-functions"
 import { errorToResult } from "@/utils/badrap-result"
 import { Result } from "@badrap/result"
 import { atom, injectEcosystem } from "@zedux/react"
-import { evaluateLengthOrHeightForAge, Gender, getLengthOrHeightForAgeDataset, LengthHeightForAgeEvalulationStatus } from "who-child-growth-standards"
+import { calculateMonthsSinceBirth, evaluateLengthOrHeightForAge, Gender, getHeightForAgeDataset, getLengthForAgeDataset, getLengthOrHeightForAgeDataset, getLengthOrHeightForAgeType, LengthHeightForAgeEvalulationStatus, LengthOrHeightForAgeType } from "who-child-growth-standards"
 
 interface LengthOrHeightForAgeEvaluationRequest {
     lengthOrHeight: number
@@ -27,18 +27,38 @@ export const lengthOrHeightEvaluationStatusAtom = atom('length-or-height-for-age
     }
 })
 
+export const lengthOrHeightForAgeTypeAtom = atom('length-or-height-for-age-type', () => {
+    const { get } = injectEcosystem()
+    const lengthOrHeightEvaluationRequest = get(lengthOrHeightEvaluationRequestAtom)
+    if (!lengthOrHeightEvaluationRequest) {
+        return undefined
+    }
+    return getLengthOrHeightForAgeType(lengthOrHeightEvaluationRequest.birthdate)
+})
+
 export const lengthOrHeightDatasetAtom = atom('length-or-height-for-age-data', () => {
     const { get } = injectEcosystem()
     const lengthOrHeightEvaluationRequest = get(lengthOrHeightEvaluationRequestAtom)
     if (!lengthOrHeightEvaluationRequest) {
         return undefined
     }
-    const { lengthForAge, heightForAge } = getLengthOrHeightForAgeDataset(lengthOrHeightEvaluationRequest.birthdate, lengthOrHeightEvaluationRequest.gender)
-    if (!lengthForAge && !heightForAge) {
+    const lengthOrHeightForAgeType = get(lengthOrHeightForAgeTypeAtom)
+    if (!lengthOrHeightForAgeType) {
         return undefined
     }
-    return { lengthForAge, heightForAge }
+    if (lengthOrHeightForAgeType == LengthOrHeightForAgeType.Length) {
+        return {
+            lengthForAge: getLengthForAgeDataset(lengthOrHeightEvaluationRequest.birthdate, lengthOrHeightEvaluationRequest.gender),
+            heightForAge: undefined,
+        }
+    } else {
+        return {
+            lengthForAge: undefined,
+            heightForAge: getHeightForAgeDataset(lengthOrHeightEvaluationRequest.birthdate, lengthOrHeightEvaluationRequest.gender),
+        }
+    }
 })
+
 
 export const lengthOrHeightForAgeD3jsChartOptionsAtom = atom('length-or-height-for-age-d3js-chart-options', () => {
     const { get } = injectEcosystem()
@@ -52,15 +72,34 @@ export const lengthOrHeightForAgeD3jsChartOptionsAtom = atom('length-or-height-f
         return undefined
     }
 
-    return {
-        lengthForAgeDataset: data.lengthForAge,
-        heightForAgeDataset: data.heightForAge,
-        title: t('length-or-height-for-age-d3js-chart-options.title'),
-        subtitle: undefined,
-        xAxisLabel: t('length-or-height-for-age-d3js-chart-options.x-axis-label'),
-        yAxisLabel: t('length-or-height-for-age-d3js-chart-options.y-axis-label'),
-        margins: { top: 60, right: 80, bottom: 60, left: 80 },
-        showGrid: true,
-        showLegend: true,
+    const lengthOrHeightForAgeType = get(lengthOrHeightForAgeTypeAtom)
+    if (!lengthOrHeightForAgeType) {
+        return undefined
+    }
+
+    if (lengthOrHeightForAgeType == LengthOrHeightForAgeType.Length) {
+        return {
+            lengthOrHeightForAgeType,
+            lengthForAgeDataset: data.lengthForAge,
+            heightForAgeDataset: undefined,
+            title: t('length-or-height-for-age-d3js-chart-options.title-length'),
+            subtitle: undefined,
+            xAxisLabel: t('length-or-height-for-age-d3js-chart-options.x-axis-label-weeks'),
+            yAxisLabel: t('length-or-height-for-age-d3js-chart-options.y-axis-label'),
+            currentAge: calculateMonthsSinceBirth(weightEvaluation.birthdate),
+            currentLengthOrHeight: weightEvaluation.lengthOrHeight,
+        }
+    } else {
+        return {
+            lengthOrHeightForAgeType,
+            lengthForAgeDataset: undefined,
+            heightForAgeDataset: data.heightForAge,
+            title: t('length-or-height-for-age-d3js-chart-options.title-height'),
+            subtitle: undefined,
+            xAxisLabel: t('length-or-height-for-age-d3js-chart-options.x-axis-label-months'),
+            yAxisLabel: t('length-or-height-for-age-d3js-chart-options.y-axis-label'),
+            currentAge: calculateMonthsSinceBirth(weightEvaluation.birthdate),
+            currentLengthOrHeight: weightEvaluation.lengthOrHeight,
+        }
     }
 })

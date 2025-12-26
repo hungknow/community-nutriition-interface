@@ -28,6 +28,11 @@ export enum WeightForLengthEvalulationStatus {
     AboveSd3 = "above-sd3",
 }
 
+export enum LengthOrHeightForAgeType {
+    Length = "length",
+    Height = "height"
+}
+
 // Used for child under 13 weeks
 export interface LengthForAge {
     week: number;

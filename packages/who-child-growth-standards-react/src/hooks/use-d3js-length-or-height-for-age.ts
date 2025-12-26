@@ -1,53 +1,21 @@
 import { useEffect, useMemo, useRef, useCallback } from "react";
 import { useMeasure } from "@uidotdev/usehooks";
-import type { 
+import { 
   LengthForAge, 
-  HeighthForAge,
+  HeightForAge,
+  LengthOrHeightForAgeType,
 } from "who-child-growth-standards";
-
-/**
- * Chart options interface matching the structure from length-height-for-age-d3js
- * These types should be exported from the package but we define them here for type safety
- * until the package types are properly generated
- */
-interface LengthForAgeChartOptions {
-  container: HTMLElement | string;
-  width: number;
-  height: number;
-  title?: string;
-  subtitle?: string;
-  xAxisLabel?: string;
-  yAxisLabel?: string;
-  margins?: { top: number; right: number; bottom: number; left: number };
-  showGrid?: boolean;
-  showLegend?: boolean;
-  colors?: {
-    sd3neg?: string;
-    sd2neg?: string;
-    sd1neg?: string;
-    sd0?: string;
-    sd1?: string;
-    sd2?: string;
-    sd3?: string;
-  };
-}
-
-type HeighthForAgeChartOptions = LengthForAgeChartOptions;
 
 // Import functions from the package
 // These are exported from length-height-for-age-d3js which is re-exported from index
-// Using dynamic import workaround for TypeScript type resolution
-import * as whoStandards from "who-child-growth-standards";
-
-const d3js_length_for_age = (whoStandards as any).d3js_length_for_age as (
-  data: LengthForAge[],
-  options: LengthForAgeChartOptions
-) => void;
-
-const d3js_height_for_age = (whoStandards as any).d3js_height_for_age as (
-  data: HeighthForAge[],
-  options: HeighthForAgeChartOptions
-) => void;
+import { 
+  d3js_length_for_age, 
+  d3js_height_for_age,
+  type LengthForAgeChartOptions,
+  type HeighthForAgeChartOptions,
+  d3js_growth_chart_point,
+  LENGTH_HEIGHT_Z_SCORE_CURVES,
+} from "who-child-growth-standards";
 
 /**
  * Options for the useD3JsLengthOrHeightForAge hook
@@ -57,10 +25,12 @@ const d3js_height_for_age = (whoStandards as any).d3js_height_for_age as (
  * so React can properly track changes and prevent unnecessary re-renders.
  */
 export interface UseD3JsLengthOrHeightForAgeOptions {
+  /** Type of measurement: length or height */
+  lengthOrHeightForAgeType: LengthOrHeightForAgeType;
   /** Array of LengthForAge data points to render (for children under 13 weeks) */
   lengthForAgeDataset?: LengthForAge[];
-  /** Array of HeighthForAge data points to render (for children over 13 weeks) */
-  heightForAgeDataset?: HeighthForAge[];
+  /** Array of HeightForAge data points to render (for children over 13 weeks) */
+  heightForAgeDataset?: HeightForAge[];
 
   /** Chart title */
   title?: string;
@@ -87,7 +57,7 @@ export interface UseD3JsLengthOrHeightForAgeOptions {
     sd3?: string;
   };
 
-  /** Current age in weeks (for LengthForAge) or months (for HeighthForAge) */
+  /** Current age in weeks (for LengthForAge) or months (for HeightForAge) */
   currentAge?: number;
   /** Current length or height measurement in cm (Y-axis value) */
   currentLengthOrHeight?: number;
@@ -145,6 +115,7 @@ export function useD3JsLengthOrHeightForAge(
   options: UseD3JsLengthOrHeightForAgeOptions
 ): UseD3JsLengthOrHeightForAgeReturn {
   const {
+    lengthOrHeightForAgeType,
     lengthForAgeDataset,
     heightForAgeDataset,
     title,
@@ -162,7 +133,7 @@ export function useD3JsLengthOrHeightForAge(
 
   // STEP 1: Use useMeasure hook to track container dimensions
   // This hook uses ResizeObserver internally to monitor size changes
-  const [measureRef, { width: measuredWidth, height: measuredHeight }] = useMeasure<HTMLDivElement>();
+  const [measureRef, { width: measuredWidth }] = useMeasure<HTMLDivElement>();
   
   // Store the element reference since measureRef is a callback ref
   const elementRef = useRef<HTMLDivElement | null>(null);
@@ -185,17 +156,19 @@ export function useD3JsLengthOrHeightForAge(
   const ASPECT_RATIO = 3/4; // height/width ratio
   const effectiveHeight = effectiveWidth !== undefined ? effectiveWidth * ASPECT_RATIO : undefined;
 
-  // STEP 2: Determine which dataset to use
-  // Prefer lengthForAgeDataset if provided, otherwise use heightForAgeDataset
+  // STEP 2: Determine which dataset to use based on lengthOrHeightForAgeType
   const dataset = useMemo(() => {
-    if (lengthForAgeDataset && lengthForAgeDataset.length > 0) {
-      return { type: 'length' as const, data: lengthForAgeDataset };
-    }
-    if (heightForAgeDataset && heightForAgeDataset.length > 0) {
-      return { type: 'height' as const, data: heightForAgeDataset };
+    if (lengthOrHeightForAgeType === LengthOrHeightForAgeType.Length) {
+      if (lengthForAgeDataset && lengthForAgeDataset.length > 0) {
+        return { type: lengthOrHeightForAgeType, data: lengthForAgeDataset };
+      }
+    } else if (lengthOrHeightForAgeType === LengthOrHeightForAgeType.Height) {
+      if (heightForAgeDataset && heightForAgeDataset.length > 0) {
+        return { type: lengthOrHeightForAgeType, data: heightForAgeDataset };
+      }
     }
     return null;
-  }, [lengthForAgeDataset, heightForAgeDataset]);
+  }, [lengthOrHeightForAgeType, lengthForAgeDataset, heightForAgeDataset]);
 
   // STEP 3: Memoize the chart options object
   // This prevents creating a new options object on every render
@@ -267,17 +240,40 @@ export function useD3JsLengthOrHeightForAge(
       };
 
       // Draw the chart based on dataset type
-      if (dataset.type === 'length') {
+      if (dataset.type === LengthOrHeightForAgeType.Length) {
         d3js_length_for_age(dataset.data, finalChartOptions as LengthForAgeChartOptions);
       } else {
         d3js_height_for_age(dataset.data, finalChartOptions as HeighthForAgeChartOptions);
       }
 
-      // TODO: Add point drawing functionality if currentAge and currentLengthOrHeight are provided
-      // Similar to d3js_weight_length_point, but for length/height-for-age
-      // if (currentAge !== undefined && currentLengthOrHeight !== undefined) {
-      //   // Draw point on chart
-      // }
+      // Draw point on chart if currentAge and currentLengthOrHeight are provided
+      if (currentAge !== undefined && currentLengthOrHeight !== undefined) {
+        if (dataset.type === LengthOrHeightForAgeType.Length) {
+          d3js_growth_chart_point({
+            data: dataset.data,
+            chartOptions: finalChartOptions,
+            xValue: currentAge,
+            yValue: currentLengthOrHeight,
+            getXValue: (d: LengthForAge) => d.week,
+            getYValue: (d: LengthForAge, curveKey: "sd3neg" | "sd2neg" | "sd1neg" | "sd0" | "sd1" | "sd2" | "sd3") => d[curveKey] as number,
+            curves: LENGTH_HEIGHT_Z_SCORE_CURVES,
+            yPadding: 0.05,
+            defaultYMax: 100,
+          });
+        } else {
+          d3js_growth_chart_point({
+            data: dataset.data,
+            chartOptions: finalChartOptions,
+            xValue: currentAge,
+            yValue: currentLengthOrHeight,
+            getXValue: (d: HeightForAge) => d.month,
+            getYValue: (d: HeightForAge, curveKey: "sd3neg" | "sd2neg" | "sd1neg" | "sd0" | "sd1" | "sd2" | "sd3") => d[curveKey] as number,
+            curves: LENGTH_HEIGHT_Z_SCORE_CURVES,
+            yPadding: 0.05,
+            defaultYMax: 100,
+          });
+        }
+      }
     } catch (error) {
       // Handle any errors during rendering
       console.error("Error rendering D3 length/height-for-age chart:", error);
