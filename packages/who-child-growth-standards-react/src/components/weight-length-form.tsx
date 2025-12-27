@@ -195,8 +195,6 @@ const GenderField = ({ control, error }: GenderFieldProps) => {
 }
 
 export const WeightLengthForm = ({ onSubmit }: WeightLengthFormProps) => {
-  const { t } = useTranslation()
-
   const {
     register,
     handleSubmit,
@@ -221,7 +219,7 @@ export const WeightLengthForm = ({ onSubmit }: WeightLengthFormProps) => {
 
         <Field orientation="horizontal">
           <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? t("submitting") : t("submit")}
+            {isSubmitting ? t("weight-length-form.submitting") : t("weight-length-form.submit")}
           </Button>
         </Field>
       </FieldGroup>

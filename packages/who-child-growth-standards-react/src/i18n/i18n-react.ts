@@ -1,5 +1,5 @@
 import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import { initReactI18next } from "react-i18next/initReactI18next";
 import { i18nResources } from "./i18n-resources";
 import { I18N_NAMESPACE_WHO_CHILD_GROWTH_STANDARDS_REACT } from "./constants";
 
