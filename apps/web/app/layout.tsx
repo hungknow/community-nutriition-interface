@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { I18nProvider } from "./components/I18nProvider";
+import { I18nProvider } from "../components/i18n-provider";
+import { SidebarLayout } from "../components/sidebar-layout";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,9 +25,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <I18nProvider>
-          {children}
+          <SidebarLayout>
+            {children}
+          </SidebarLayout>
         </I18nProvider>
       </body>
     </html>
